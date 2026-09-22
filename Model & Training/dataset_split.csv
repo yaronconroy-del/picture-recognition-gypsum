@@ -1,177 +1,177 @@
-filename,original_filename,captured_at,daynight,label,burst_id,split,split_75,split_70,fold_lite,extended_label,burst_id_extended,split_extended,split_extended_75,split_extended_70,fold_extended
-img_00fe1599.jpeg,WhatsApp Image 2026-09-22 at 12.43.02 (1).jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_038799f8.jpeg,WhatsApp Image 2026-09-09 at 11.29.58 (1).jpeg,2026-09-09T11:29:58,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_04b1c902.jpeg,WhatsApp Image 2026-09-22 at 12.43.04 (1).jpeg,2026-09-22T12:43:04,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_04b6553a.jpeg,WhatsApp Image 2026-09-09 at 11.29.47.jpeg,2026-09-09T11:29:47,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_07a76f6a.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (3).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_1142579d.jpeg,WhatsApp Image 2026-09-22 at 12.43.06 (3).jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_117bb8c6.jpeg,WhatsApp Image 2026-09-09 at 11.29.56.jpeg,2026-09-09T11:29:56,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_12b3d4ef.jpeg,WhatsApp Image 2026-09-09 at 11.29.47 (2).jpeg,2026-09-09T11:29:47,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_192e00ed.jpeg,WhatsApp Image 2026-09-09 at 11.29.54 (1).jpeg,2026-09-09T11:29:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_19385763.jpeg,WhatsApp Image 2026-09-22 at 12.43.03.jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_22159b66.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (2).jpeg,2026-09-22T12:42:57,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_25f18fb2.jpeg,WhatsApp Image 2026-09-22 at 12.43.07 (2).jpeg,2026-09-22T12:43:07,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_2b991090.jpeg,WhatsApp Image 2026-09-22 at 12.43.04 (2).jpeg,2026-09-22T12:43:04,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_2e9ce7b5.jpeg,WhatsApp Image 2026-09-22 at 12.43.00 (3).jpeg,2026-09-22T12:43:00,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_327bd52b.jpeg,WhatsApp Image 2026-09-09 at 11.29.49 (3).jpeg,2026-09-09T11:29:49,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_372b89a7.jpeg,WhatsApp Image 2026-09-09 at 11.29.46.jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_37b2d6dc.jpeg,WhatsApp Image 2026-09-09 at 11.29.43.jpeg,2026-09-09T11:29:43,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_3c66565b.jpeg,WhatsApp Image 2026-09-09 at 11.29.46 (3).jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_41cdd824.jpeg,WhatsApp Image 2026-09-22 at 12.43.02.jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_428e4506.jpeg,WhatsApp Image 2026-09-22 at 12.43.04.jpeg,2026-09-22T12:43:04,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_488fa5fc.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (1).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_4c3695ad.jpeg,WhatsApp Image 2026-09-09 at 11.29.45.jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_4d64c3ae.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (2).jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_4ef61c87.jpeg,WhatsApp Image 2026-09-22 at 12.43.00.jpeg,2026-09-22T12:43:00,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_56653df3.jpeg,WhatsApp Image 2026-09-22 at 12.43.04 (3).jpeg,2026-09-22T12:43:04,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_56e683f9.jpeg,WhatsApp Image 2026-09-22 at 12.42.56 (3).jpeg,2026-09-22T12:42:56,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_58f145b1.jpeg,WhatsApp Image 2026-09-09 at 11.31.49 (2).jpeg,2026-09-09T11:31:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_5d80941e.jpeg,WhatsApp Image 2026-09-22 at 12.43.07.jpeg,2026-09-22T12:43:07,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_5ea424eb.jpeg,WhatsApp Image 2026-09-22 at 12.43.03 (2).jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_5fae05b1.jpeg,WhatsApp Image 2026-09-09 at 11.29.50 (3).jpeg,2026-09-09T11:29:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_5fe7180e.jpeg,WhatsApp Image 2026-09-09 at 11.29.48 (2).jpeg,2026-09-09T11:29:48,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_63fad1ff.jpeg,WhatsApp Image 2026-09-22 at 12.43.02 (2).jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_649d77cc.jpeg,WhatsApp Image 2026-09-09 at 11.29.46 (2).jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_696bcaef.jpeg,WhatsApp Image 2026-09-09 at 11.31.54 (3).jpeg,2026-09-09T11:31:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_6aca91b2.jpeg,WhatsApp Image 2026-09-22 at 12.43.06 (1).jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_6cf4b6dd.jpeg,WhatsApp Image 2026-09-09 at 11.29.55.jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_6f6d5811.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (4).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_753d1a7f.jpeg,WhatsApp Image 2026-09-22 at 12.42.54 (3).jpeg,2026-09-22T12:42:54,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_7575a784.jpeg,WhatsApp Image 2026-09-09 at 11.31.51 (2).jpeg,2026-09-09T11:31:51,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_791e6e52.jpeg,WhatsApp Image 2026-09-09 at 11.31.54 (2).jpeg,2026-09-09T11:31:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_79a76cba.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (3).jpeg,2026-09-22T12:42:57,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_7bf3d383.jpeg,WhatsApp Image 2026-09-22 at 12.42.58 (3).jpeg,2026-09-22T12:42:58,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_7c8f13a9.jpeg,WhatsApp Image 2026-09-09 at 11.29.49 (1).jpeg,2026-09-09T11:29:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_7e043a50.jpeg,WhatsApp Image 2026-09-09 at 11.29.59.jpeg,2026-09-09T11:29:59,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_841234d0.jpeg,WhatsApp Image 2026-09-09 at 11.29.50.jpeg,2026-09-09T11:29:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_87c99e61.jpeg,WhatsApp Image 2026-09-22 at 12.43.06 (2).jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_881cf0b6.jpeg,WhatsApp Image 2026-09-22 at 12.43.03 (3).jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_8c53ee97.jpeg,WhatsApp Image 2026-09-09 at 11.29.52 (3).jpeg,2026-09-09T11:29:52,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_8e41e37c.jpeg,WhatsApp Image 2026-09-09 at 11.29.56 (1).jpeg,2026-09-09T11:29:56,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_8f2e2930.jpeg,WhatsApp Image 2026-09-22 at 12.43.01.jpeg,2026-09-22T12:43:01,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_90603c3a.jpeg,WhatsApp Image 2026-09-09 at 11.27.36 (2).jpeg,2026-09-09T11:27:36,day,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1
-img_9183d6f8.jpeg,WhatsApp Image 2026-09-22 at 12.42.54 (2).jpeg,2026-09-22T12:42:54,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_9394a54b.jpeg,WhatsApp Image 2026-09-09 at 11.31.54 (1).jpeg,2026-09-09T11:31:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_955a33e4.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (4).jpeg,2026-09-22T12:42:57,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_981afa1e.jpeg,WhatsApp Image 2026-09-22 at 12.42.59 (3).jpeg,2026-09-22T12:42:59,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_98480368.jpeg,WhatsApp Image 2026-09-09 at 11.29.48 (3).jpeg,2026-09-09T11:29:48,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_9a15388c.jpeg,WhatsApp Image 2026-09-22 at 12.43.01 (1).jpeg,2026-09-22T12:43:01,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_a092fc5f.jpeg,WhatsApp Image 2026-09-09 at 11.29.54 (2).jpeg,2026-09-09T11:29:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_a1f68496.jpeg,WhatsApp Image 2026-09-22 at 12.42.54 (1).jpeg,2026-09-22T12:42:54,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_a200b52e.jpeg,WhatsApp Image 2026-09-09 at 11.31.49.jpeg,2026-09-09T11:31:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_a3dedf92.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (2).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_a7a1789e.jpeg,WhatsApp Image 2026-09-22 at 12.43.08.jpeg,2026-09-22T12:43:08,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_a7a3bb39.jpeg,WhatsApp Image 2026-09-09 at 11.27.34.jpeg,2026-09-09T11:27:34,day,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1
-img_b5c3a81e.jpeg,WhatsApp Image 2026-09-09 at 11.31.49 (1).jpeg,2026-09-09T11:31:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_b66565a2.jpeg,WhatsApp Image 2026-09-22 at 12.43.03 (1).jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_bbe3f1fc.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (4).jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_bcf36623.jpeg,WhatsApp Image 2026-09-09 at 11.31.55.jpeg,2026-09-09T11:31:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_bd5250f9.jpeg,WhatsApp Image 2026-09-09 at 11.29.47 (3).jpeg,2026-09-09T11:29:47,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_bd738e90.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (3).jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_be08eeb3.jpeg,WhatsApp Image 2026-09-22 at 12.43.00 (2).jpeg,2026-09-22T12:43:00,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_bf35d12a.jpeg,WhatsApp Image 2026-09-22 at 12.43.06.jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_c40321ce.jpeg,WhatsApp Image 2026-09-09 at 11.29.54.jpeg,2026-09-09T11:29:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_c5ea3478.jpeg,WhatsApp Image 2026-09-22 at 12.43.00 (1).jpeg,2026-09-22T12:43:00,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_c6f8f2c0.jpeg,WhatsApp Image 2026-09-09 at 11.31.51 (1).jpeg,2026-09-09T11:31:51,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_c9f53d06.jpeg,WhatsApp Image 2026-09-09 at 11.27.35 (3).jpeg,2026-09-09T11:27:35,day,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1
-img_cb3985c3.jpeg,WhatsApp Image 2026-09-22 at 12.43.02 (3).jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_d0bcf8ea.jpeg,WhatsApp Image 2026-09-09 at 11.29.52 (2).jpeg,2026-09-09T11:29:52,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_d385c90c.jpeg,WhatsApp Image 2026-09-22 at 12.43.01 (3).jpeg,2026-09-22T12:43:01,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_dbb222f5.jpeg,WhatsApp Image 2026-09-22 at 12.43.01 (2).jpeg,2026-09-22T12:43:01,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_dc014cc2.jpeg,WhatsApp Image 2026-09-09 at 11.31.50 (2).jpeg,2026-09-09T11:31:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_de7cd841.jpeg,WhatsApp Image 2026-09-09 at 11.29.46 (1).jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_dfa74e21.jpeg,WhatsApp Image 2026-09-09 at 11.31.50 (1).jpeg,2026-09-09T11:31:50,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_e35c8b4b.jpeg,WhatsApp Image 2026-09-09 at 11.29.43 (1).jpeg,2026-09-09T11:29:43,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_e438b337.jpeg,WhatsApp Image 2026-09-09 at 11.29.48.jpeg,2026-09-09T11:29:48,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_f068a9a7.jpeg,WhatsApp Image 2026-09-22 at 12.42.59.jpeg,2026-09-22T12:42:59,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_f3698994.jpeg,WhatsApp Image 2026-09-22 at 12.43.07 (1).jpeg,2026-09-22T12:43:07,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
-img_f63ae624.jpeg,WhatsApp Image 2026-09-09 at 11.31.51.jpeg,2026-09-09T11:31:51,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_f83cf881.jpeg,WhatsApp Image 2026-09-09 at 11.31.50 (3).jpeg,2026-09-09T11:31:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_fa7d7d7b.jpeg,WhatsApp Image 2026-09-22 at 12.42.59 (1).jpeg,2026-09-22T12:42:59,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_fd86d419.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (1).jpeg,2026-09-09T11:29:53,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
-img_fe1957f6.jpeg,WhatsApp Image 2026-09-22 at 12.42.58 (2).jpeg,2026-09-22T12:42:58,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
-img_ffd70a9c.jpeg,WhatsApp Image 2026-09-09 at 11.29.49 (2).jpeg,2026-09-09T11:29:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
-img_031fdd6d.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (1).jpeg,2026-09-09T11:29:45,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_0c1fc21d.jpeg,WhatsApp Image 2026-09-09 at 11.29.52 (1).jpeg,2026-09-09T11:29:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_0ef27fd4.jpeg,WhatsApp Image 2026-09-22 at 12.43.12 (1).jpeg,2026-09-22T12:43:12,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_13d5c871.jpeg,WhatsApp Image 2026-09-09 at 11.29.56 (2).jpeg,2026-09-09T11:29:56,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
-img_1433c88d.jpeg,WhatsApp Image 2026-09-09 at 11.29.58.jpeg,2026-09-09T11:29:58,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_14828faf.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (3).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_15cc9e25.jpeg,WhatsApp Image 2026-09-22 at 12.43.11 (1).jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_189a430c.jpeg,WhatsApp Image 2026-09-09 at 11.29.58 (2).jpeg,2026-09-09T11:29:58,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_211633bb.jpeg,WhatsApp Image 2026-09-22 at 12.42.55.jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_21e720a1.jpeg,WhatsApp Image 2026-09-22 at 12.43.05.jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_2226ab17.jpeg,WhatsApp Image 2026-09-09 at 11.31.52 (2).jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_2638f897.jpeg,WhatsApp Image 2026-09-09 at 11.29.51.jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_33509e00.jpeg,WhatsApp Image 2026-09-09 at 11.27.35 (1).jpeg,2026-09-09T11:27:35,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
-img_33df4a0e.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (3).jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_3bbb85bf.jpeg,WhatsApp Image 2026-09-09 at 11.27.35 (2).jpeg,2026-09-09T11:27:35,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
-img_3d3412da.jpeg,WhatsApp Image 2026-09-22 at 12.42.56.jpeg,2026-09-22T12:42:56,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_4369e2fa.jpeg,WhatsApp Image 2026-09-22 at 12.43.09 (2).jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_4462d030.jpeg,WhatsApp Image 2026-09-09 at 11.29.44.jpeg,2026-09-09T11:29:44,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_4b369d3d.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (1).jpeg,2026-09-22T12:42:57,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1
-img_51df9603.jpeg,WhatsApp Image 2026-09-22 at 12.43.05 (1).jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_5444afe7.jpeg,WhatsApp Image 2026-09-22 at 12.42.55 (3).jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_555e80e0.jpeg,WhatsApp Image 2026-09-09 at 11.27.34 (1).jpeg,2026-09-09T11:27:34,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
-img_60aa3da4.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (2).jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_6ba39c2d.jpeg,WhatsApp Image 2026-09-22 at 12.43.11.jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_6cbfebd4.jpeg,WhatsApp Image 2026-09-22 at 12.43.09 (1).jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_6cdec466.jpeg,WhatsApp Image 2026-09-09 at 11.29.53.jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_6fbc5335.jpeg,WhatsApp Image 2026-09-09 at 11.29.52.jpeg,2026-09-09T11:29:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_710d0f12.jpeg,WhatsApp Image 2026-09-22 at 12.42.57.jpeg,2026-09-22T12:42:57,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_73b619c5.jpeg,WhatsApp Image 2026-09-09 at 11.29.44 (2).jpeg,2026-09-09T11:29:44,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_77b05d72.jpeg,WhatsApp Image 2026-09-09 at 11.29.43 (2).jpeg,2026-09-09T11:29:43,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_78a8a8cf.jpeg,WhatsApp Image 2026-09-09 at 11.29.51 (2).jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_79954938.jpeg,WhatsApp Image 2026-09-09 at 11.29.57 (2).jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_7a24ecce.jpeg,WhatsApp Image 2026-09-09 at 11.29.51 (1).jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_7b054313.jpeg,WhatsApp Image 2026-09-22 at 12.43.08 (2).jpeg,2026-09-22T12:43:08,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_7b7f756e.jpeg,WhatsApp Image 2026-09-22 at 12.42.59 (2).jpeg,2026-09-22T12:42:59,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1
-img_7c44f256.jpeg,WhatsApp Image 2026-09-09 at 11.31.52 (1).jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_7d15feae.jpeg,WhatsApp Image 2026-09-09 at 11.31.53.jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_7d3cf863.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (4).jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_7e172a93.jpeg,WhatsApp Image 2026-09-09 at 11.29.57 (3).jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_7f7705c4.jpeg,WhatsApp Image 2026-09-09 at 11.31.51 (3).jpeg,2026-09-09T11:31:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_80800772.jpeg,WhatsApp Image 2026-09-09 at 11.29.47 (1).jpeg,2026-09-09T11:29:47,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
-img_80bebcdf.jpeg,WhatsApp Image 2026-09-09 at 11.29.57 (1).jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_82bde360.jpeg,WhatsApp Image 2026-09-09 at 11.29.48 (1).jpeg,2026-09-09T11:29:48,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
-img_858e2a5d.jpeg,WhatsApp Image 2026-09-22 at 12.43.11 (2).jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_85fb2eb1.jpeg,WhatsApp Image 2026-09-09 at 11.27.36.jpeg,2026-09-09T11:27:36,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
-img_86382b84.jpeg,WhatsApp Image 2026-09-22 at 12.43.09.jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_880c97d2.jpeg,WhatsApp Image 2026-09-22 at 12.43.05 (3).jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_8f93917e.jpeg,WhatsApp Image 2026-09-22 at 12.43.10 (1).jpeg,2026-09-22T12:43:10,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_8fd6892f.jpeg,WhatsApp Image 2026-09-22 at 12.42.58.jpeg,2026-09-22T12:42:58,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1
-img_91a6ed7d.jpeg,WhatsApp Image 2026-09-22 at 12.42.56 (1).jpeg,2026-09-22T12:42:56,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_94ac88d0.jpeg,WhatsApp Image 2026-09-22 at 12.43.10.jpeg,2026-09-22T12:43:10,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_950d7c64.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (2).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_95b97ea1.jpeg,WhatsApp Image 2026-09-22 at 12.42.55 (2).jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_9e164a1c.jpeg,WhatsApp Image 2026-09-22 at 12.43.11 (3).jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_a23d2694.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (1).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_a2cad26c.jpeg,WhatsApp Image 2026-09-09 at 11.29.43.jpeg,2026-09-09T11:29:43,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_a316ff42.jpeg,WhatsApp Image 2026-09-09 at 11.29.51 (3).jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_a73320f8.jpeg,WhatsApp Image 2026-09-09 at 11.31.52.jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_aa3da068.jpeg,WhatsApp Image 2026-09-09 at 11.29.58 (3).jpeg,2026-09-09T11:29:58,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_aca15f12.jpeg,WhatsApp Image 2026-09-22 at 12.43.05 (2).jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_b1de1859.jpeg,WhatsApp Image 2026-09-22 at 12.42.54.jpeg,2026-09-22T12:42:54,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_b33c06e7.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (4).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_bd611798.jpeg,WhatsApp Image 2026-09-09 at 11.29.44 (1).jpeg,2026-09-09T11:29:44,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_cf25ef18.jpeg,WhatsApp Image 2026-09-22 at 12.42.55 (1).jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_d1184c9a.jpeg,WhatsApp Image 2026-09-09 at 11.31.50.jpeg,2026-09-09T11:31:50,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
-img_d337e84d.jpeg,WhatsApp Image 2026-09-09 at 11.29.57.jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_daf6a817.jpeg,WhatsApp Image 2026-09-09 at 11.27.36 (1).jpeg,2026-09-09T11:27:36,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
-img_e0822324.jpeg,WhatsApp Image 2026-09-22 at 12.43.12.jpeg,2026-09-22T12:43:12,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_e2e2906f.jpeg,WhatsApp Image 2026-09-22 at 12.43.08 (3).jpeg,2026-09-22T12:43:08,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_eb96e411.jpeg,WhatsApp Image 2026-09-09 at 11.31.52 (3).jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
-img_f085a517.jpeg,WhatsApp Image 2026-09-22 at 12.42.58 (1).jpeg,2026-09-22T12:42:58,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1
-img_f47b3e7f.jpeg,WhatsApp Image 2026-09-22 at 12.42.56 (2).jpeg,2026-09-22T12:42:56,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_f5a8cf4f.jpeg,WhatsApp Image 2026-09-09 at 11.29.49.jpeg,2026-09-09T11:29:49,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
-img_f9776dae.jpeg,WhatsApp Image 2026-09-22 at 12.43.12 (2).jpeg,2026-09-22T12:43:12,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_f9eb45ed.jpeg,WhatsApp Image 2026-09-22 at 12.43.09 (3).jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_fedef011.jpeg,WhatsApp Image 2026-09-22 at 12.43.08 (1).jpeg,2026-09-22T12:43:08,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
-img_052502fa.jpeg,WhatsApp Image 2026-09-22 at 12.43.10 (3).jpeg,2026-09-22T12:43:10,n/a,empty,b4,test,test,test,2,empty,b4,test,test,test,1
-img_46907167.jpeg,WhatsApp Image 2026-09-22 at 12.43.10 (2).jpeg,2026-09-22T12:43:10,n/a,empty,b4,test,test,test,2,empty,b4,test,test,test,1
-img_52fd647e.jpeg,WhatsApp Image 2026-09-09 at 11.27.35.jpeg,2026-09-09T11:27:35,n/a,empty,b1,train,train,train,0,empty,b1,train,train,train,0
-img_8edb4400.jpeg,WhatsApp Image 2026-09-09 at 11.29.50 (2).jpeg,2026-09-09T11:29:50,n/a,empty,b2,train,train,train,1,empty,b2,train,train,train,1
-img_9019503b.jpeg,WhatsApp Image 2026-09-09 at 11.27.34 (2).jpeg,2026-09-09T11:27:34,n/a,empty,b1,train,train,train,0,empty,b1,train,train,train,0
-img_c9cd2055.jpeg,WhatsApp Image 2026-09-09 at 11.27.34 (3).jpeg,2026-09-09T11:27:34,n/a,empty,b1,train,train,train,0,empty,b1,train,train,train,0
-img_dcfa087a.jpeg,WhatsApp Image 2026-09-09 at 11.31.54.jpeg,2026-09-09T11:31:54,n/a,empty,b3,train,train,train,1,empty,b3,train,train,train,0
-img_e463b9a2.jpeg,WhatsApp Image 2026-09-09 at 11.29.50 (1).jpeg,2026-09-09T11:29:50,n/a,empty,b2,train,train,train,1,empty,b2,train,train,train,1
+filename,original_filename,captured_at,daynight,label,burst_id,split,split_75,split_70,fold_lite,extended_label,burst_id_extended,split_extended,split_extended_75,split_extended_70,fold_extended,noempty_label,burst_id_noempty,split_noempty,split_noempty_75,split_noempty_70,fold_noempty,noempty_split_label,burst_id_noempty4,split_noempty4,split_noempty4_75,split_noempty4_70,fold_noempty4
+img_00fe1599.jpeg,WhatsApp Image 2026-09-22 at 12.43.02 (1).jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_038799f8.jpeg,WhatsApp Image 2026-09-09 at 11.29.58 (1).jpeg,2026-09-09T11:29:58,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_04b1c902.jpeg,WhatsApp Image 2026-09-22 at 12.43.04 (1).jpeg,2026-09-22T12:43:04,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_04b6553a.jpeg,WhatsApp Image 2026-09-09 at 11.29.47.jpeg,2026-09-09T11:29:47,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_07a76f6a.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (3).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_1142579d.jpeg,WhatsApp Image 2026-09-22 at 12.43.06 (3).jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_117bb8c6.jpeg,WhatsApp Image 2026-09-09 at 11.29.56.jpeg,2026-09-09T11:29:56,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_12b3d4ef.jpeg,WhatsApp Image 2026-09-09 at 11.29.47 (2).jpeg,2026-09-09T11:29:47,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_192e00ed.jpeg,WhatsApp Image 2026-09-09 at 11.29.54 (1).jpeg,2026-09-09T11:29:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_19385763.jpeg,WhatsApp Image 2026-09-22 at 12.43.03.jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_22159b66.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (2).jpeg,2026-09-22T12:42:57,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_25f18fb2.jpeg,WhatsApp Image 2026-09-22 at 12.43.07 (2).jpeg,2026-09-22T12:43:07,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_2b991090.jpeg,WhatsApp Image 2026-09-22 at 12.43.04 (2).jpeg,2026-09-22T12:43:04,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_2e9ce7b5.jpeg,WhatsApp Image 2026-09-22 at 12.43.00 (3).jpeg,2026-09-22T12:43:00,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_327bd52b.jpeg,WhatsApp Image 2026-09-09 at 11.29.49 (3).jpeg,2026-09-09T11:29:49,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_372b89a7.jpeg,WhatsApp Image 2026-09-09 at 11.29.46.jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_37b2d6dc.jpeg,WhatsApp Image 2026-09-09 at 11.29.43.jpeg,2026-09-09T11:29:43,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_3c66565b.jpeg,WhatsApp Image 2026-09-09 at 11.29.46 (3).jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_41cdd824.jpeg,WhatsApp Image 2026-09-22 at 12.43.02.jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_428e4506.jpeg,WhatsApp Image 2026-09-22 at 12.43.04.jpeg,2026-09-22T12:43:04,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_488fa5fc.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (1).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_4c3695ad.jpeg,WhatsApp Image 2026-09-09 at 11.29.45.jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_4d64c3ae.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (2).jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_4ef61c87.jpeg,WhatsApp Image 2026-09-22 at 12.43.00.jpeg,2026-09-22T12:43:00,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_56653df3.jpeg,WhatsApp Image 2026-09-22 at 12.43.04 (3).jpeg,2026-09-22T12:43:04,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_56e683f9.jpeg,WhatsApp Image 2026-09-22 at 12.42.56 (3).jpeg,2026-09-22T12:42:56,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_58f145b1.jpeg,WhatsApp Image 2026-09-09 at 11.31.49 (2).jpeg,2026-09-09T11:31:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_5d80941e.jpeg,WhatsApp Image 2026-09-22 at 12.43.07.jpeg,2026-09-22T12:43:07,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_5ea424eb.jpeg,WhatsApp Image 2026-09-22 at 12.43.03 (2).jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_5fae05b1.jpeg,WhatsApp Image 2026-09-09 at 11.29.50 (3).jpeg,2026-09-09T11:29:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_5fe7180e.jpeg,WhatsApp Image 2026-09-09 at 11.29.48 (2).jpeg,2026-09-09T11:29:48,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_63fad1ff.jpeg,WhatsApp Image 2026-09-22 at 12.43.02 (2).jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_649d77cc.jpeg,WhatsApp Image 2026-09-09 at 11.29.46 (2).jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_696bcaef.jpeg,WhatsApp Image 2026-09-09 at 11.31.54 (3).jpeg,2026-09-09T11:31:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_6aca91b2.jpeg,WhatsApp Image 2026-09-22 at 12.43.06 (1).jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_6cf4b6dd.jpeg,WhatsApp Image 2026-09-09 at 11.29.55.jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_6f6d5811.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (4).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_753d1a7f.jpeg,WhatsApp Image 2026-09-22 at 12.42.54 (3).jpeg,2026-09-22T12:42:54,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_7575a784.jpeg,WhatsApp Image 2026-09-09 at 11.31.51 (2).jpeg,2026-09-09T11:31:51,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_791e6e52.jpeg,WhatsApp Image 2026-09-09 at 11.31.54 (2).jpeg,2026-09-09T11:31:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_79a76cba.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (3).jpeg,2026-09-22T12:42:57,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_7bf3d383.jpeg,WhatsApp Image 2026-09-22 at 12.42.58 (3).jpeg,2026-09-22T12:42:58,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_7c8f13a9.jpeg,WhatsApp Image 2026-09-09 at 11.29.49 (1).jpeg,2026-09-09T11:29:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_7e043a50.jpeg,WhatsApp Image 2026-09-09 at 11.29.59.jpeg,2026-09-09T11:29:59,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_841234d0.jpeg,WhatsApp Image 2026-09-09 at 11.29.50.jpeg,2026-09-09T11:29:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_87c99e61.jpeg,WhatsApp Image 2026-09-22 at 12.43.06 (2).jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_881cf0b6.jpeg,WhatsApp Image 2026-09-22 at 12.43.03 (3).jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_8c53ee97.jpeg,WhatsApp Image 2026-09-09 at 11.29.52 (3).jpeg,2026-09-09T11:29:52,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_8e41e37c.jpeg,WhatsApp Image 2026-09-09 at 11.29.56 (1).jpeg,2026-09-09T11:29:56,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_8f2e2930.jpeg,WhatsApp Image 2026-09-22 at 12.43.01.jpeg,2026-09-22T12:43:01,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_90603c3a.jpeg,WhatsApp Image 2026-09-09 at 11.27.36 (2).jpeg,2026-09-09T11:27:36,day,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1
+img_9183d6f8.jpeg,WhatsApp Image 2026-09-22 at 12.42.54 (2).jpeg,2026-09-22T12:42:54,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_9394a54b.jpeg,WhatsApp Image 2026-09-09 at 11.31.54 (1).jpeg,2026-09-09T11:31:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_955a33e4.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (4).jpeg,2026-09-22T12:42:57,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_981afa1e.jpeg,WhatsApp Image 2026-09-22 at 12.42.59 (3).jpeg,2026-09-22T12:42:59,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_98480368.jpeg,WhatsApp Image 2026-09-09 at 11.29.48 (3).jpeg,2026-09-09T11:29:48,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_9a15388c.jpeg,WhatsApp Image 2026-09-22 at 12.43.01 (1).jpeg,2026-09-22T12:43:01,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_a092fc5f.jpeg,WhatsApp Image 2026-09-09 at 11.29.54 (2).jpeg,2026-09-09T11:29:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_a1f68496.jpeg,WhatsApp Image 2026-09-22 at 12.42.54 (1).jpeg,2026-09-22T12:42:54,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_a200b52e.jpeg,WhatsApp Image 2026-09-09 at 11.31.49.jpeg,2026-09-09T11:31:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_a3dedf92.jpeg,WhatsApp Image 2026-09-09 at 11.29.55 (2).jpeg,2026-09-09T11:29:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_a7a1789e.jpeg,WhatsApp Image 2026-09-22 at 12.43.08.jpeg,2026-09-22T12:43:08,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_a7a3bb39.jpeg,WhatsApp Image 2026-09-09 at 11.27.34.jpeg,2026-09-09T11:27:34,day,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1
+img_b5c3a81e.jpeg,WhatsApp Image 2026-09-09 at 11.31.49 (1).jpeg,2026-09-09T11:31:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_b66565a2.jpeg,WhatsApp Image 2026-09-22 at 12.43.03 (1).jpeg,2026-09-22T12:43:03,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_bbe3f1fc.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (4).jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_bcf36623.jpeg,WhatsApp Image 2026-09-09 at 11.31.55.jpeg,2026-09-09T11:31:55,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_bd5250f9.jpeg,WhatsApp Image 2026-09-09 at 11.29.47 (3).jpeg,2026-09-09T11:29:47,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_bd738e90.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (3).jpeg,2026-09-09T11:29:45,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_be08eeb3.jpeg,WhatsApp Image 2026-09-22 at 12.43.00 (2).jpeg,2026-09-22T12:43:00,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_bf35d12a.jpeg,WhatsApp Image 2026-09-22 at 12.43.06.jpeg,2026-09-22T12:43:06,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_c40321ce.jpeg,WhatsApp Image 2026-09-09 at 11.29.54.jpeg,2026-09-09T11:29:54,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_c5ea3478.jpeg,WhatsApp Image 2026-09-22 at 12.43.00 (1).jpeg,2026-09-22T12:43:00,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_c6f8f2c0.jpeg,WhatsApp Image 2026-09-09 at 11.31.51 (1).jpeg,2026-09-09T11:31:51,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_c9f53d06.jpeg,WhatsApp Image 2026-09-09 at 11.27.35 (3).jpeg,2026-09-09T11:27:35,day,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1,valid,b1,test,train,train,2,valid_day,b1,test,train,train,1
+img_cb3985c3.jpeg,WhatsApp Image 2026-09-22 at 12.43.02 (3).jpeg,2026-09-22T12:43:02,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_d0bcf8ea.jpeg,WhatsApp Image 2026-09-09 at 11.29.52 (2).jpeg,2026-09-09T11:29:52,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_d385c90c.jpeg,WhatsApp Image 2026-09-22 at 12.43.01 (3).jpeg,2026-09-22T12:43:01,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_dbb222f5.jpeg,WhatsApp Image 2026-09-22 at 12.43.01 (2).jpeg,2026-09-22T12:43:01,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_dc014cc2.jpeg,WhatsApp Image 2026-09-09 at 11.31.50 (2).jpeg,2026-09-09T11:31:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_de7cd841.jpeg,WhatsApp Image 2026-09-09 at 11.29.46 (1).jpeg,2026-09-09T11:29:46,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_dfa74e21.jpeg,WhatsApp Image 2026-09-09 at 11.31.50 (1).jpeg,2026-09-09T11:31:50,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_e35c8b4b.jpeg,WhatsApp Image 2026-09-09 at 11.29.43 (1).jpeg,2026-09-09T11:29:43,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_e438b337.jpeg,WhatsApp Image 2026-09-09 at 11.29.48.jpeg,2026-09-09T11:29:48,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_f068a9a7.jpeg,WhatsApp Image 2026-09-22 at 12.42.59.jpeg,2026-09-22T12:42:59,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_f3698994.jpeg,WhatsApp Image 2026-09-22 at 12.43.07 (1).jpeg,2026-09-22T12:43:07,night,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0,valid,b3,train,test,test,1,valid_night,b2,train,train,train,0
+img_f63ae624.jpeg,WhatsApp Image 2026-09-09 at 11.31.51.jpeg,2026-09-09T11:31:51,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_f83cf881.jpeg,WhatsApp Image 2026-09-09 at 11.31.50 (3).jpeg,2026-09-09T11:31:50,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_fa7d7d7b.jpeg,WhatsApp Image 2026-09-22 at 12.42.59 (1).jpeg,2026-09-22T12:42:59,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_fd86d419.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (1).jpeg,2026-09-09T11:29:53,day,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0,valid,b2,train,train,train,0,valid_day,b2,train,train,train,0
+img_fe1957f6.jpeg,WhatsApp Image 2026-09-22 at 12.42.58 (2).jpeg,2026-09-22T12:42:58,day,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1,valid,b3,train,test,test,1,valid_day,b3,train,test,test,1
+img_ffd70a9c.jpeg,WhatsApp Image 2026-09-09 at 11.29.49 (2).jpeg,2026-09-09T11:29:49,night,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1,valid,b2,train,train,train,0,valid_night,b1,train,test,test,1
+img_031fdd6d.jpeg,WhatsApp Image 2026-09-09 at 11.29.45 (1).jpeg,2026-09-09T11:29:45,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_0c1fc21d.jpeg,WhatsApp Image 2026-09-09 at 11.29.52 (1).jpeg,2026-09-09T11:29:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_0ef27fd4.jpeg,WhatsApp Image 2026-09-22 at 12.43.12 (1).jpeg,2026-09-22T12:43:12,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_13d5c871.jpeg,WhatsApp Image 2026-09-09 at 11.29.56 (2).jpeg,2026-09-09T11:29:56,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
+img_1433c88d.jpeg,WhatsApp Image 2026-09-09 at 11.29.58.jpeg,2026-09-09T11:29:58,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_14828faf.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (3).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_15cc9e25.jpeg,WhatsApp Image 2026-09-22 at 12.43.11 (1).jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_189a430c.jpeg,WhatsApp Image 2026-09-09 at 11.29.58 (2).jpeg,2026-09-09T11:29:58,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_211633bb.jpeg,WhatsApp Image 2026-09-22 at 12.42.55.jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_21e720a1.jpeg,WhatsApp Image 2026-09-22 at 12.43.05.jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_2226ab17.jpeg,WhatsApp Image 2026-09-09 at 11.31.52 (2).jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_2638f897.jpeg,WhatsApp Image 2026-09-09 at 11.29.51.jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_33509e00.jpeg,WhatsApp Image 2026-09-09 at 11.27.35 (1).jpeg,2026-09-09T11:27:35,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_33df4a0e.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (3).jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_3bbb85bf.jpeg,WhatsApp Image 2026-09-09 at 11.27.35 (2).jpeg,2026-09-09T11:27:35,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_3d3412da.jpeg,WhatsApp Image 2026-09-22 at 12.42.56.jpeg,2026-09-22T12:42:56,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_4369e2fa.jpeg,WhatsApp Image 2026-09-22 at 12.43.09 (2).jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_4462d030.jpeg,WhatsApp Image 2026-09-09 at 11.29.44.jpeg,2026-09-09T11:29:44,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_4b369d3d.jpeg,WhatsApp Image 2026-09-22 at 12.42.57 (1).jpeg,2026-09-22T12:42:57,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1,invalid,b3,train,train,test,1,invalid_day,b3,train,test,test,1
+img_51df9603.jpeg,WhatsApp Image 2026-09-22 at 12.43.05 (1).jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_5444afe7.jpeg,WhatsApp Image 2026-09-22 at 12.42.55 (3).jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_555e80e0.jpeg,WhatsApp Image 2026-09-09 at 11.27.34 (1).jpeg,2026-09-09T11:27:34,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_60aa3da4.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (2).jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_6ba39c2d.jpeg,WhatsApp Image 2026-09-22 at 12.43.11.jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_6cbfebd4.jpeg,WhatsApp Image 2026-09-22 at 12.43.09 (1).jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_6cdec466.jpeg,WhatsApp Image 2026-09-09 at 11.29.53.jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_6fbc5335.jpeg,WhatsApp Image 2026-09-09 at 11.29.52.jpeg,2026-09-09T11:29:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_710d0f12.jpeg,WhatsApp Image 2026-09-22 at 12.42.57.jpeg,2026-09-22T12:42:57,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_73b619c5.jpeg,WhatsApp Image 2026-09-09 at 11.29.44 (2).jpeg,2026-09-09T11:29:44,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_77b05d72.jpeg,WhatsApp Image 2026-09-09 at 11.29.43 (2).jpeg,2026-09-09T11:29:43,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_78a8a8cf.jpeg,WhatsApp Image 2026-09-09 at 11.29.51 (2).jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_79954938.jpeg,WhatsApp Image 2026-09-09 at 11.29.57 (2).jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_7a24ecce.jpeg,WhatsApp Image 2026-09-09 at 11.29.51 (1).jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_7b054313.jpeg,WhatsApp Image 2026-09-22 at 12.43.08 (2).jpeg,2026-09-22T12:43:08,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_7b7f756e.jpeg,WhatsApp Image 2026-09-22 at 12.42.59 (2).jpeg,2026-09-22T12:42:59,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1,invalid,b3,train,train,test,1,invalid_day,b3,train,test,test,1
+img_7c44f256.jpeg,WhatsApp Image 2026-09-09 at 11.31.52 (1).jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_7d15feae.jpeg,WhatsApp Image 2026-09-09 at 11.31.53.jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_7d3cf863.jpeg,WhatsApp Image 2026-09-09 at 11.29.53 (4).jpeg,2026-09-09T11:29:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_7e172a93.jpeg,WhatsApp Image 2026-09-09 at 11.29.57 (3).jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_7f7705c4.jpeg,WhatsApp Image 2026-09-09 at 11.31.51 (3).jpeg,2026-09-09T11:31:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_80800772.jpeg,WhatsApp Image 2026-09-09 at 11.29.47 (1).jpeg,2026-09-09T11:29:47,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
+img_80bebcdf.jpeg,WhatsApp Image 2026-09-09 at 11.29.57 (1).jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_82bde360.jpeg,WhatsApp Image 2026-09-09 at 11.29.48 (1).jpeg,2026-09-09T11:29:48,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
+img_858e2a5d.jpeg,WhatsApp Image 2026-09-22 at 12.43.11 (2).jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_85fb2eb1.jpeg,WhatsApp Image 2026-09-09 at 11.27.36.jpeg,2026-09-09T11:27:36,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_86382b84.jpeg,WhatsApp Image 2026-09-22 at 12.43.09.jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_880c97d2.jpeg,WhatsApp Image 2026-09-22 at 12.43.05 (3).jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_8f93917e.jpeg,WhatsApp Image 2026-09-22 at 12.43.10 (1).jpeg,2026-09-22T12:43:10,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_8fd6892f.jpeg,WhatsApp Image 2026-09-22 at 12.42.58.jpeg,2026-09-22T12:42:58,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1,invalid,b3,train,train,test,1,invalid_day,b3,train,test,test,1
+img_91a6ed7d.jpeg,WhatsApp Image 2026-09-22 at 12.42.56 (1).jpeg,2026-09-22T12:42:56,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_94ac88d0.jpeg,WhatsApp Image 2026-09-22 at 12.43.10.jpeg,2026-09-22T12:43:10,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_950d7c64.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (2).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_95b97ea1.jpeg,WhatsApp Image 2026-09-22 at 12.42.55 (2).jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_9e164a1c.jpeg,WhatsApp Image 2026-09-22 at 12.43.11 (3).jpeg,2026-09-22T12:43:11,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_a23d2694.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (1).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_a2cad26c.jpeg,WhatsApp Image 2026-09-09 at 11.29.43.jpeg,2026-09-09T11:29:43,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_a316ff42.jpeg,WhatsApp Image 2026-09-09 at 11.29.51 (3).jpeg,2026-09-09T11:29:51,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_a73320f8.jpeg,WhatsApp Image 2026-09-09 at 11.31.52.jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_aa3da068.jpeg,WhatsApp Image 2026-09-09 at 11.29.58 (3).jpeg,2026-09-09T11:29:58,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_aca15f12.jpeg,WhatsApp Image 2026-09-22 at 12.43.05 (2).jpeg,2026-09-22T12:43:05,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_b1de1859.jpeg,WhatsApp Image 2026-09-22 at 12.42.54.jpeg,2026-09-22T12:42:54,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_b33c06e7.jpeg,WhatsApp Image 2026-09-09 at 11.31.53 (4).jpeg,2026-09-09T11:31:53,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_bd611798.jpeg,WhatsApp Image 2026-09-09 at 11.29.44 (1).jpeg,2026-09-09T11:29:44,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_cf25ef18.jpeg,WhatsApp Image 2026-09-22 at 12.42.55 (1).jpeg,2026-09-22T12:42:55,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_d1184c9a.jpeg,WhatsApp Image 2026-09-09 at 11.31.50.jpeg,2026-09-09T11:31:50,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
+img_d337e84d.jpeg,WhatsApp Image 2026-09-09 at 11.29.57.jpeg,2026-09-09T11:29:57,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_daf6a817.jpeg,WhatsApp Image 2026-09-09 at 11.27.36 (1).jpeg,2026-09-09T11:27:36,day,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_e0822324.jpeg,WhatsApp Image 2026-09-22 at 12.43.12.jpeg,2026-09-22T12:43:12,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_e2e2906f.jpeg,WhatsApp Image 2026-09-22 at 12.43.08 (3).jpeg,2026-09-22T12:43:08,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_eb96e411.jpeg,WhatsApp Image 2026-09-09 at 11.31.52 (3).jpeg,2026-09-09T11:31:52,day,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_f085a517.jpeg,WhatsApp Image 2026-09-22 at 12.42.58 (1).jpeg,2026-09-22T12:42:58,day,invalid,b3,train,train,test,1,invalid_day,b3,test,test,test,1,invalid,b3,train,train,test,1,invalid_day,b3,train,test,test,1
+img_f47b3e7f.jpeg,WhatsApp Image 2026-09-22 at 12.42.56 (2).jpeg,2026-09-22T12:42:56,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_f5a8cf4f.jpeg,WhatsApp Image 2026-09-09 at 11.29.49.jpeg,2026-09-09T11:29:49,night,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1,invalid,b2,train,train,train,0,invalid_night,b1,test,test,test,1
+img_f9776dae.jpeg,WhatsApp Image 2026-09-22 at 12.43.12 (2).jpeg,2026-09-22T12:43:12,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_f9eb45ed.jpeg,WhatsApp Image 2026-09-22 at 12.43.09 (3).jpeg,2026-09-22T12:43:09,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_fedef011.jpeg,WhatsApp Image 2026-09-22 at 12.43.08 (1).jpeg,2026-09-22T12:43:08,night,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_052502fa.jpeg,WhatsApp Image 2026-09-22 at 12.43.10 (3).jpeg,2026-09-22T12:43:10,n/a,empty,b4,test,test,test,2,empty,b4,test,test,test,1,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_46907167.jpeg,WhatsApp Image 2026-09-22 at 12.43.10 (2).jpeg,2026-09-22T12:43:10,n/a,empty,b4,test,test,test,2,empty,b4,test,test,test,1,invalid,b3,train,train,test,1,invalid_night,b2,train,train,train,0
+img_52fd647e.jpeg,WhatsApp Image 2026-09-09 at 11.27.35.jpeg,2026-09-09T11:27:35,n/a,empty,b1,train,train,train,0,empty,b1,train,train,train,0,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_8edb4400.jpeg,WhatsApp Image 2026-09-09 at 11.29.50 (2).jpeg,2026-09-09T11:29:50,n/a,empty,b2,train,train,train,1,empty,b2,train,train,train,1,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_9019503b.jpeg,WhatsApp Image 2026-09-09 at 11.27.34 (2).jpeg,2026-09-09T11:27:34,n/a,empty,b1,train,train,train,0,empty,b1,train,train,train,0,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_c9cd2055.jpeg,WhatsApp Image 2026-09-09 at 11.27.34 (3).jpeg,2026-09-09T11:27:34,n/a,empty,b1,train,train,train,0,empty,b1,train,train,train,0,invalid,b1,test,test,train,2,invalid_day,b1,test,test,test,1
+img_dcfa087a.jpeg,WhatsApp Image 2026-09-09 at 11.31.54.jpeg,2026-09-09T11:31:54,n/a,empty,b3,train,train,train,1,empty,b3,train,train,train,0,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0
+img_e463b9a2.jpeg,WhatsApp Image 2026-09-09 at 11.29.50 (1).jpeg,2026-09-09T11:29:50,n/a,empty,b2,train,train,train,1,empty,b2,train,train,train,1,invalid,b2,train,train,train,0,invalid_day,b2,train,train,train,0

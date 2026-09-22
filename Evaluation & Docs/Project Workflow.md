@@ -111,10 +111,33 @@ Also added: `Model & Training/notebooks/compare_label_schemes.ipynb`, an A/B tes
 - The oversampling variant (`WeightedRandomSampler` on top of the existing class-weighted loss) made **no difference** on lite 80/20 — identical metrics to the plain run. Given the loss weighting already exists, resampling the same ~6 `empty` training images more often doesn't add new information; more real `empty` photos would.
 - This is evidence worth weighing against the §5 decision to simplify to 3 classes — it may be worth reconsidering, though still on a very small dataset (single seed, CPU run).
 
-## 7. Open Questions / Next Steps
+## 8. No-empty scheme — round 2 (2026-09-22)
+
+A 4th label scheme: "empty filter" redefined as a kind of **invalid** rather than its own class — the reasoning being that an empty filter is arguably a fault state too, not a neutral third option. `Model & Training/pictures/no-empty version/` is a copy of `extended version/` with the 8 `מסנן ריק` photos manually moved by hand into `לא תקין יום`/`לא תקין לילה` (6 day, 2 night, judged by eye). Read at two granularities: **collapsed** (2-class: `valid`/`invalid`) and **split** (4-class: `valid_day`/`valid_night`/`invalid_day`/`invalid_night`).
+
+`Model & Training/scripts/optimize_noempty_models.py` ran the same ratio sweep + CV as §6, same fixed config. 4-fold CV was attempted (as requested) but the data didn't support it — `determine_k()` found the scarcest class only has 2–3 independent sessions, capping CV to 3-fold (collapsed) / 2-fold (split); merging the empty photos in mostly landed them inside existing invalid sessions rather than creating new independent ones.
+
+| Variant | Accuracy | Val loss | Macro F1 | Invalid recall |
+|---|---|---|---|---|
+| No-empty collapsed, 80/20 | 0.909 | 0.570 | 0.895 | 0.875 |
+| No-empty collapsed, 75/25 | 0.792 | 0.536 | 0.722 | 0.875 |
+| No-empty collapsed, 70/30 | 0.480 | 0.643 | 0.381 | 0.086 |
+| No-empty collapsed, 3-fold CV | 0.708 ± 0.143 | 0.492 | 0.684 | 0.577 ± 0.267 |
+| No-empty split, 80/20 | 0.938 | 0.431 | 0.909 | 0.923 |
+| No-empty split, 75/25 | 0.782 | 0.411 | 0.764 | 0.824 |
+| No-empty split, 70/30 | 0.764 | 0.442 | 0.742 | 0.765 |
+| **No-empty split, 2-fold CV** | **0.774 ± 0.019** | 0.474 | 0.760 | **0.711 ± 0.054** |
+
+**Findings — this is the headline result of the whole optimization effort:**
+- **No-empty split (4-class) beats every scheme tried in this project**, on CV (the trustworthy metric): 77.4% ± 1.9 accuracy vs. the previous best, extended, at 72.3% ± 0.5 (§6). It's both higher *and* has a tighter spread.
+- **No-empty collapsed (2-class) is not trustworthy despite its high single-split numbers.** Its CV variance is huge (±14.3 points — one fold scored 80.0%, another only 50.7%), almost certainly because collapsing day/night here throws away a real signal that the split version keeps. Its 90.9%/80-20 number (n=11 test images) is exactly the kind of small-test-set noise this project's docs have flagged repeatedly — don't quote it without the CV caveat.
+- Every 80/20 single-split number in this table uses a very small test set (11–16 images) and should be read with caution; CV is the number to trust.
+- Net effect of the "empty = invalid" reframing: it appears to genuinely help, not just shuffle the same information around — likely because the model no longer has to learn a 3rd/5th class from only 6–8 examples, and "empty" and "invalid" probably share some real visual similarity (bare or torn filter surface) that the model can exploit once they're merged.
+
+## 9. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
-- Reconsider the 3-class simplification (§5) given the extended scheme's consistent edge in §6 — or collect more data before deciding.
+- **Decide the label scheme** given §6 and §8 together: no-empty split (4-class) is the current leader, ahead of extended (5-class), ahead of lite (3-class) — still on a very small dataset, single seed, CPU-only runs.
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.

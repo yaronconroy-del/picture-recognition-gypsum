@@ -1,0 +1,37 @@
+{
+  "config": {
+    "backbone": "mobilenet_v2",
+    "unfreeze_last_block": true,
+    "lr": 0.001,
+    "epochs": 10
+  },
+  "quick_smoke_test": false,
+  "_note": "Reconstructed from the full run's console log after an accidental `rm -rf` of the output folder right after the run finished; all values below are transcribed exactly from that log, not re-run. Per-fold macro_f1/val_loss std weren't printed individually so are omitted here (accuracy_std and invalid_recall_std were).",
+  "collapsed_80_20": {"accuracy": 0.909, "best_val_loss": 0.570, "macro_f1": 0.895, "invalid_recall": 0.875, "n_test": 11},
+  "collapsed_75_25": {"accuracy": 0.792, "best_val_loss": 0.536, "macro_f1": 0.722, "invalid_recall": 0.875, "n_test": 48},
+  "collapsed_70_30": {"accuracy": 0.480, "best_val_loss": 0.643, "macro_f1": 0.381, "invalid_recall": 0.086, "n_test": 75},
+  "collapsed_cv": {
+    "k": 3,
+    "accuracy": 0.708, "accuracy_std": 0.143,
+    "invalid_recall": 0.577, "invalid_recall_std": 0.267,
+    "macro_f1": 0.684, "best_val_loss": 0.492,
+    "folds": [
+      {"accuracy": 0.800, "invalid_recall": 0.780, "n_test": 90},
+      {"accuracy": 0.507, "invalid_recall": 0.200, "n_test": 75},
+      {"accuracy": 0.818, "invalid_recall": 0.750, "n_test": 11}
+    ]
+  },
+  "split_80_20": {"accuracy": 0.938, "best_val_loss": 0.431, "macro_f1": 0.909, "invalid_recall": 0.923, "n_test": 16},
+  "split_75_25": {"accuracy": 0.782, "best_val_loss": 0.411, "macro_f1": 0.764, "invalid_recall": 0.824, "n_test": 55},
+  "split_70_30": {"accuracy": 0.764, "best_val_loss": 0.442, "macro_f1": 0.742, "invalid_recall": 0.765, "n_test": 55},
+  "split_cv": {
+    "k": 2,
+    "accuracy": 0.774, "accuracy_std": 0.019,
+    "invalid_recall": 0.711, "invalid_recall_std": 0.054,
+    "macro_f1": 0.760, "best_val_loss": 0.474,
+    "folds": [
+      {"accuracy": 0.754, "invalid_recall": 0.657, "n_test": 118},
+      {"accuracy": 0.793, "invalid_recall": 0.765, "n_test": 58}
+    ]
+  }
+}

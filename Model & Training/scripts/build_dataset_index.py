@@ -56,6 +56,7 @@ from datetime import datetime, timedelta
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TRAINING_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
 SIMPLE_DIR = os.path.join(TRAINING_DIR, "pictures", "simple version")
+NOEMPTY_DIR = os.path.join(TRAINING_DIR, "pictures", "no-empty version")
 MANIFEST = os.path.abspath(
     os.path.join(TRAINING_DIR, "..", "Evaluation & Docs", "context", "rename_manifest.csv")
 )
@@ -63,6 +64,12 @@ OUTPUT = os.path.join(TRAINING_DIR, "dataset_split.csv")
 
 LITE_LABELS = ["valid", "invalid", "empty"]
 EXTENDED_LABELS = ["valid_day", "valid_night", "invalid_day", "invalid_night", "empty"]
+# No separate "empty" here: those 8 photos were manually redistributed into
+# invalid_day/invalid_night in pictures/no-empty version/ (see Project
+# Workflow.md) — "empty filter" redefined as a kind of invalid rather than
+# its own class.
+NOEMPTY_COLLAPSED_LABELS = ["valid", "invalid"]
+NOEMPTY_SPLIT_LABELS = ["valid_day", "valid_night", "invalid_day", "invalid_night"]
 
 # Gap between two photos (by their real capture time) beyond which they
 # count as separate "bursts" rather than the same near-duplicate group.
@@ -84,6 +91,9 @@ MIN_TRAIN_FLOOR = {"empty": 3}
 # the most this scheme's data actually supports.
 K_FOLDS_LITE = 3
 K_FOLDS_EXTENDED = 2
+# Desired K for the no-empty schemes — actual K is capped automatically
+# (determine_k) to whatever the scarcest group's session count supports.
+K_FOLDS_NOEMPTY_DESIRED = 4
 
 RANDOM_SEED = 42
 
@@ -226,6 +236,26 @@ def assign_folds(records, group_name, burst_field, fold_field, k):
     return counts
 
 
+def determine_k(records_by_group, group_names, burst_field, desired_k):
+    """Caps desired_k to the scarcest group's independent-session count
+    (assign_bursts must already have run) so no fold is structurally
+    guaranteed to be empty for some class."""
+    burst_counts = {
+        group: len({r[burst_field] for r in records_by_group.get(group, [])})
+        for group in group_names
+    }
+    max_k = min(burst_counts.values()) if burst_counts else 1
+    k = max(1, min(desired_k, max_k))
+    if k < desired_k:
+        print(
+            f"  Note: wanted {desired_k}-fold CV but the scarcest group only has "
+            f"{max_k} independent session(s) {burst_counts} -> using {k}-fold instead."
+        )
+    else:
+        print(f"  {desired_k}-fold CV is fully supported {burst_counts}.")
+    return k
+
+
 def build_scheme(records_by_group, group_names, burst_field, ratio_configs):
     """Runs burst-assignment (once) and a split per ratio for each group.
     ratio_configs: list of (split_field, train_ratio)."""
@@ -304,8 +334,97 @@ def main():
     for group in EXTENDED_LABELS:
         assign_folds(by_extended[group], group, "burst_id_extended", "fold_extended", K_FOLDS_EXTENDED)
 
+    # --- No-empty scheme: pictures/no-empty version/ — the same 176 photos,
+    # but "empty" was manually redistributed by hand into invalid_day /
+    # invalid_night, so it isn't its own class here. Two granularities of
+    # this, same as lite/extended: collapsed (2-class) and split (4-class).
+    if not os.path.isdir(NOEMPTY_DIR):
+        raise RuntimeError(
+            f"Missing {NOEMPTY_DIR} — this scheme needs pictures/no-empty version/ "
+            f"(a copy of extended version/ with the empty photos manually moved "
+            f"into invalid_day/invalid_night)."
+        )
+
+    noempty_folder_to_split_label = {
+        "תקין יום": "valid_day",
+        "תקין לילה": "valid_night",
+        "לא תקין יום": "invalid_day",
+        "לא תקין לילה": "invalid_night",
+    }
+    noempty_records = []
+    for folder_name, split_label in noempty_folder_to_split_label.items():
+        folder_path = os.path.join(NOEMPTY_DIR, folder_name)
+        if not os.path.isdir(folder_path):
+            raise RuntimeError(f"Missing expected folder: {folder_path}")
+        collapsed_label, daynight = split_label.rsplit("_", 1)
+        for fname in sorted(os.listdir(folder_path)):
+            if not os.path.isfile(os.path.join(folder_path, fname)):
+                continue
+            original_filename, _ = manifest.get(fname, (None, None))
+            captured_at = parse_captured_at(original_filename) if original_filename else None
+            noempty_records.append({
+                "filename": fname,
+                "noempty_label": collapsed_label,
+                "noempty_split_label": split_label,
+                "original_filename": original_filename or "",
+                "captured_at": captured_at,
+            })
+
+    noempty_by_filename = {r["filename"]: r for r in noempty_records}
+    if set(noempty_by_filename) != {r["filename"] for r in all_records}:
+        raise RuntimeError(
+            "pictures/no-empty version/ doesn't have the exact same 176 filenames "
+            "as the other dataset versions — check for a partial move or a stray file."
+        )
+
+    noempty_collapsed_ratio_configs = [(f"split_noempty{suffix}", ratio) for suffix, ratio in RATIOS]
+    noempty_split_ratio_configs = [(f"split_noempty4{suffix}", ratio) for suffix, ratio in RATIOS]
+
+    by_noempty_collapsed = {
+        label: [r for r in noempty_records if r["noempty_label"] == label]
+        for label in NOEMPTY_COLLAPSED_LABELS
+    }
+    build_scheme(
+        by_noempty_collapsed, NOEMPTY_COLLAPSED_LABELS,
+        burst_field="burst_id_noempty", ratio_configs=noempty_collapsed_ratio_configs,
+    )
+
+    by_noempty_split = {
+        label: [r for r in noempty_records if r["noempty_split_label"] == label]
+        for label in NOEMPTY_SPLIT_LABELS
+    }
+    build_scheme(
+        by_noempty_split, NOEMPTY_SPLIT_LABELS,
+        burst_field="burst_id_noempty4", ratio_configs=noempty_split_ratio_configs,
+    )
+
+    print(f"\n--- CV assignment (no-empty, collapsed 2-class) — want {K_FOLDS_NOEMPTY_DESIRED}-fold ---")
+    k_noempty_collapsed = determine_k(
+        by_noempty_collapsed, NOEMPTY_COLLAPSED_LABELS, "burst_id_noempty", K_FOLDS_NOEMPTY_DESIRED
+    )
+    for label in NOEMPTY_COLLAPSED_LABELS:
+        assign_folds(by_noempty_collapsed[label], label, "burst_id_noempty", "fold_noempty", k_noempty_collapsed)
+
+    print(f"\n--- CV assignment (no-empty, split 4-class) — want {K_FOLDS_NOEMPTY_DESIRED}-fold ---")
+    k_noempty_split = determine_k(
+        by_noempty_split, NOEMPTY_SPLIT_LABELS, "burst_id_noempty4", K_FOLDS_NOEMPTY_DESIRED
+    )
+    for label in NOEMPTY_SPLIT_LABELS:
+        assign_folds(by_noempty_split[label], label, "burst_id_noempty4", "fold_noempty4", k_noempty_split)
+
     lite_split_cols = [field for field, _ in lite_ratio_configs]
     extended_split_cols = [field for field, _ in extended_ratio_configs]
+    noempty_collapsed_split_cols = [field for field, _ in noempty_collapsed_ratio_configs]
+    noempty_split_split_cols = [field for field, _ in noempty_split_ratio_configs]
+
+    noempty_merge_cols = (
+        ["noempty_label", "burst_id_noempty"] + noempty_collapsed_split_cols + ["fold_noempty"]
+        + ["noempty_split_label", "burst_id_noempty4"] + noempty_split_split_cols + ["fold_noempty4"]
+    )
+    for r in all_records:
+        ne = noempty_by_filename[r["filename"]]
+        for col in noempty_merge_cols:
+            r[col] = ne[col]
 
     os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
     with open(OUTPUT, "w", newline="", encoding="utf-8") as f:
@@ -317,6 +436,7 @@ def main():
             + ["extended_label", "burst_id_extended"]
             + extended_split_cols
             + ["fold_extended"]
+            + noempty_merge_cols
         )
         for r in all_records:
             writer.writerow(
@@ -330,16 +450,20 @@ def main():
                 + [r["extended_label"], r["burst_id_extended"]]
                 + [r[col] for col in extended_split_cols]
                 + [r["fold_extended"]]
+                + [r[col] for col in noempty_merge_cols]
             )
 
     print(f"\nWrote {len(all_records)} rows to {OUTPUT}")
     print(f"Lite split columns: {lite_split_cols}")
     print(f"Extended split columns: {extended_split_cols}")
+    print(f"No-empty (2-class) split columns: {noempty_collapsed_split_cols}")
+    print(f"No-empty (4-class) split columns: {noempty_split_split_cols}")
     print(
         "\nNote: session sizes are uneven (one big shoot per class often holds most "
         "of the photos), so a ratio target is approximate, not exact, once whole "
         "sessions are kept together — see each scheme's 'test %' above. The 'empty' "
-        "class is additionally floored at 3 train images regardless of ratio."
+        "class (in lite/extended) is additionally floored at 3 train images "
+        "regardless of ratio."
     )
 
 
