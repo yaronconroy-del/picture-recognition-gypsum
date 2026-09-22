@@ -127,6 +127,13 @@ All around 11:29 **AM** — clearly not solar daytime vs. nighttime. Whatever th
 
 - **Label scheme**: simplified to **3 classes** — `valid`, `invalid`, `empty` (§3.2). Day/night is not a separate class; it's handled as a lighting condition the model needs to be robust to (via augmentation), and checked for during evaluation rather than predicted.
 - **Framework**: PyTorch, using a pretrained torchvision backbone (transfer learning) rather than training a CNN from scratch, given the small dataset.
+- **Fine-tuning strategy**: MobileNetV2 (52 conv layers across 19 blocks: 1 stem + 17 inverted-residual bottlenecks + 1 head), ImageNet-pretrained. Only the last block (`features[-1]`, the head conv) and the new classifier layer are unfrozen and actually trained — everything earlier stays frozen at its pretrained weights. Reasoning:
+  - **Overfitting risk**: MobileNetV2 has ~3.4M parameters; fully fine-tuning all of it on 176 images (some classes as few as 8) would let the network memorize the training set instead of generalizing. Freezing most of it acts as a strong regularizer.
+  - **Early/mid layers are already general-purpose** — pretrained on 1.2M ImageNet images, they've learned edges, textures, and shapes that transfer to any image task, this one included. Nothing to gain from re-learning them on 176 photos, and real risk of making them worse.
+  - **Only the last block is "specific enough" to be worth adapting** — the deeper a layer sits, the more it encodes concepts specific to the *original* task (ImageNet's object classes). `features[-1]` is the layer right before the classifier, so unfreezing just that one lets the model reshape its final representation toward "cake texture is even vs. cracked/patchy" without touching the general-purpose feature extractors underneath.
+  - **Compute**: this project trains 17 configs (23 counting CV folds), mostly on CPU — fewer trainable parameters means faster training across that many runs.
+  - This matches the related-work finding in §1.1: transfer learning with a mostly-frozen backbone is standard practice specifically because industrial defect-detection datasets are usually small.
+  - **This is a dataset-size-driven choice, not a ceiling** — with a much larger database (§16.3's full-scale pilot), unfreezing more blocks, or full fine-tuning, would likely improve on this further. Worth revisiting once real data volume allows it, rather than assuming today's freeze point is permanently correct.
 - **Training environment**: Google Colab (free GPU) — the local machine's GPU (AMD, no CUDA) can't do accelerated training on Windows.
 - **Deliverables**: a walkthrough notebook, a written results report, presentation slides, and a local live-demo script.
 
@@ -287,6 +294,7 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 
 **Full-scale pilot (plant engineer's roadmap, 2026-09-23):**
 - **Retrain on a much larger database** once IT/data-access constraints are lifted for a real pilot — the current 176-image result is a proof of concept, not the ceiling.
+- **Unfreeze more of the backbone** — the current fine-tuning strategy (§5: only the last MobileNetV2 block + classifier trainable, everything else frozen) is a dataset-size-driven choice, not a permanent one. A much larger database would support unfreezing more blocks, or full fine-tuning, likely improving on today's numbers further.
 - **Add projectors around the filter** to normalize lighting between "day" and "night" conditions and reduce shadow effects — engineers the day/night ambiguity (§3.4, §16.2) away at the source instead of continuing to try to explain it after the fact.
 - **Move beyond binary valid/invalid to a continuous filtration-quality score**, so the process's actual trend is visible, not just a pass/fail flag.
 - **Make it a time-based model** that tracks change over a sequence of frames and flags when the process is *starting* to turn bad — early warning instead of single-frame classification after the fact.
