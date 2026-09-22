@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Models / checkpoints (can get large — add exceptions here later if you want specific ones tracked)
+*.pt
+*.pth
+*.h5
+*.ckpt
+
+# OS
+.DS_Store
+Thumbs.db
