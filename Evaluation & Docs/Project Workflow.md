@@ -32,6 +32,12 @@ This project comes directly from a real process at the author's plant, a **wet-p
 
 **The business case for this project**: filtration problems are currently caught by manual visual inspection, which is inherently intermittent (an operator can't watch the feed continuously) and inconsistent (judgment varies between operators and shifts). **Automating "valid/invalid" recognition from the existing camera feed, instead of relying on manual checks, is estimated to recover 10–15% of these losses** — by catching bad filtration sooner and more consistently than a person checking periodically can. That gap between "loss happens" and "loss is noticed" is exactly what this project's image classifier is meant to close.
 
+**Monetized, with assumptions stated explicitly** (so they can be corrected with real plant figures):
+- $2,000/hour per 1% P2O5, at a typical ~3% equivalent → **~$6,000/hour** effective yield-loss rate during a bad-filtration episode.
+- At ~6% of operating hours affected and an assumed **~8,000 operating hours/year** (~91% uptime — replace with the plant's real annual operating hours for an exact figure): ~480 affected hours/year → **~$2,880,000/year in yield-loss exposure**.
+- **Automated detection recovering 10–15% of that → roughly $288,000–$432,000/year recovered**, from the yield-loss component alone.
+- The separate ~3% additional annual downtime from equipment damage (≈240 hours/year) has its own cost, priced in lost production rather than lost yield — left in hours, not dollars, pending a $/hour-of-downtime figure.
+
 This also resolves two of this doc's earlier open questions (§15): the equipment is a **gypsum belt filter** (not a "Gibson filter" — an earlier mishearing/typo), and "invalid" specifically means **wet gypsum**, not just visual cracking/patchiness for its own sake — the visual cracking/patchiness *is* how wet, poorly-dewatered gypsum looks on camera, which is why the visual classification task is a meaningful proxy for the real problem (yield loss + downtime), not just a cosmetic check.
 
 ## 2. Current State of the Project
@@ -211,6 +217,11 @@ This is a useful negative result: with two models this close in quality but one 
 
 §9 made this look like a toss-up against extended (CV AUC 0.837 vs. 0.818) — but that compared each scheme against **its own** definition of "invalid," a slightly different question per model. §10's boost analysis put both schemes on the **same** ground truth (the no-empty definition) in the same run, and there no-empty split won clearly on every metric: accuracy, invalid recall, ROC AUC (0.852 vs. 0.808), and PR AP (0.805 vs. 0.769). Combined with §8's accuracy lead (77.4% vs. 72.3% CV) and §10's finding that split alone beats every ensemble attempt, the evidence converges on one answer once the comparison is made fair. Lite and no-empty collapsed were ruled out earlier by every analysis in this doc.
 
+**Beyond the numbers, there's a stronger operational reason to fold "empty" into "invalid" rather than keep it as a 3rd/5th class**, per the plant engineer's own reasoning (2026-09-23):
+1. The "empty" dataset is tiny (8 of 176 images) — the statistical reason already covered above.
+2. **A live model doesn't need to detect "empty" at all** — the operator empties the filter themselves, so they already know it's empty; the camera has no information advantage there. Asking the model to spend capacity distinguishing "empty" from "invalid" is solving a problem the operator doesn't have.
+3. The natural production design follows from this: **the model gets toggled off when the operator empties the filter, and toggled back on once filtration resumes** — "empty" is an operator-controlled state to route around, not a class the vision model needs to recognize on its own.
+
 - **Recommended operating threshold**: ~0.45–0.5 (F1-optimal values for split-based models ranged 0.435–0.541 across §9's and §10's separate runs) — re-derive the exact figure from `full_pipeline.ipynb`'s output once run for real, since that's the one consolidated, non-redundant source of truth going forward.
 - **Promoted model**: `models/gypsum_classifier_split_70_30.pt`, produced by `full_pipeline.ipynb` — kept alongside `gypsum_classifier_extended_70_30.pt` as the runner-up candidate, not deleted.
 - **Caveat, stated plainly, not buried**: still a 176-photo dataset, single seed, CPU-trained runs throughout. This is the best-supported hypothesis given everything tried, not a production-validated result — deploy it as the leading candidate and monitor, don't treat the question as permanently closed.
@@ -232,8 +243,43 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 ## 15. Open Questions / Next Steps
 
 - ~~Confirm the exact equipment name/process and what "invalid" means beyond visual cracking/patchiness~~ — answered, see §1.2: it's a gypsum belt filter, and "invalid" means wet gypsum (yield loss + equipment damage risk).
-- Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day, and §3.5's EDA rules out a simple whole-image-brightness explanation too. Still unresolved.
+- Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day, and §3.5's EDA rules out a simple whole-image-brightness explanation too. Still unresolved — §16's full-scale-pilot plan proposes engineering the ambiguity away with fixed lighting, rather than continuing to try to explain it post-hoc.
 - If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
 - Run `full_pipeline.ipynb` for real in Colab to produce `gypsum_classifier_split_70_30.pt`, then re-point `predict.py`'s spot-check at it.
 - Decide where the real camera feed comes from (RTSP stream, a folder the camera itself writes to, etc.) — §14's watcher is a stand-in for whatever that turns out to be.
 - Decide the real deployment target (local script, small server, edge device near the camera, etc.) and the real alerting channel (§14 only prints to the console).
+
+## 16. Conclusions, Limitations & Further Directions (2026-09-23)
+
+### 16.1 Conclusions
+
+- **No-empty split (4-class)** is the strongest model found: ~77% CV accuracy, ROC AUC 0.852 — clearly ahead of every other scheme once compared on the same ground truth (§12).
+- Folding "empty filter" into "invalid" measurably helps, and it's the operationally correct design, not just a statistical convenience — §12 now covers both: the empty class is tiny (8 images), *and* a live deployment doesn't need to detect "empty" at all, since the operator empties the filter themselves and already knows it. The model is meant to be toggled off for that operator-controlled window and back on once filtration resumes.
+- The naive 0.5 probability cutoff was **under-flagging real faults** — tuned thresholds (~0.3–0.5, F1-optimal) catch more actual invalid cases at a small cost in false alarms (§9).
+- Ensembling/TTA/calibration did **not** beat the single best model — reported as a straight negative result rather than spun (§10).
+- Ties back to the business case (§1.2): automated detection is estimated to recover **~$288,000–$432,000/year** in yield-loss value alone, at 10–15% recovery of the ~$2.88M/year yield-loss exposure — plus an unpriced share of the ~240 additional downtime-hours/year from equipment damage.
+
+### 16.2 Limitations
+
+- **Small dataset, by IT constraint, not by choice** — access to plant photos for this project was limited by IT/data-access restrictions, leaving only 176 images (8 of them "empty"). The results here are real and better than chance would predict, but every accuracy number carries meaningful uncertainty (CV std devs of several points) — a full-scale pilot with proper data access would retrain on a much larger database and should do materially better.
+- Single seed, mostly CPU-trained runs — results could shift with a different seed or backbone.
+- The **promoted model hasn't been trained for a real full run yet** — `full_pipeline.ipynb` still needs a real (non-`QUICK_MODE`) pass in Colab to produce final weights; "promoted" is provisional.
+- **Day/night remains unexplained** — ruled out literal time-of-day and whole-image brightness, but the real distinguishing factor is still unknown (§16.3 proposes removing the ambiguity at the source instead).
+- The live-feed demo is a **simulation** (folder-watcher + console alert), not a real camera/RTSP integration or real alerting channel.
+- Single fixed camera install, uncontrolled lighting — unclear how well this generalizes to a different angle or to genuinely fixed lighting without retraining.
+- Source images are WhatsApp-recompressed, not native camera resolution.
+- The model currently only outputs a binary valid/invalid call — no sense of *how* valid or invalid, or of trend over time.
+
+### 16.3 Further directions
+
+**Near-term (fixing what this phase left open):**
+- Run `full_pipeline.ipynb` for real to get trustworthy final numbers and the actual promoted model weights.
+- Try confidence-weighted ensembling (weight the stronger model more) instead of a plain average.
+- Build the real camera feed + alerting channel, replacing the folder-watcher simulation.
+
+**Full-scale pilot (plant engineer's roadmap, 2026-09-23):**
+- **Retrain on a much larger database** once IT/data-access constraints are lifted for a real pilot — the current 176-image result is a proof of concept, not the ceiling.
+- **Add projectors around the filter** to normalize lighting between "day" and "night" conditions and reduce shadow effects — engineers the day/night ambiguity (§3.4, §16.2) away at the source instead of continuing to try to explain it after the fact.
+- **Move beyond binary valid/invalid to a continuous filtration-quality score**, so the process's actual trend is visible, not just a pass/fail flag.
+- **Make it a time-based model** that tracks change over a sequence of frames and flags when the process is *starting* to turn bad — early warning instead of single-frame classification after the fact.
+- **Far future**: a downstream model that calculates the right reactor process parameters based on the predicted filtration state — closing the loop from vision straight through to process control, not just alerting an operator.
