@@ -19,3 +19,6 @@ Thumbs.db
 # IDE
 .idea/
 .vscode/
+
+# Claude Code runtime state
+.claude/*.lock
