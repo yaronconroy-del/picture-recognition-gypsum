@@ -280,12 +280,12 @@
 <div class="wrap">
   <p class="eyebrow">Gypsum filter recognition · AI course final project</p>
   <h1>Where the project stands</h1>
-  <p class="lede">Eight phases from raw camera photos to a deployed classifier. Six are done, two are in progress.</p>
+  <p class="lede">Eight phases from raw camera photos to a deployed classifier. Seven are done, one is up next.</p>
 
   <div class="overview">
     <div class="overview-top">
       <span class="label">Overall progress</span>
-      <span class="figure">75%<small>6 of 8 phases done</small></span>
+      <span class="figure">88%<small>7 of 8 phases done</small></span>
     </div>
     <div class="segbar" aria-hidden="true">
       <span class="done"></span>
@@ -294,7 +294,7 @@
       <span class="done"></span>
       <span class="done"></span>
       <span class="done"></span>
-      <span></span>
+      <span class="done"></span>
       <span class="upnext"></span>
     </div>
     <div class="seg-labels">
@@ -441,21 +441,22 @@
       </div>
     </details>
 
-    <details class="card upnext" open>
+    <details class="card done" open>
       <summary>
-        <span class="dot upnext"></span>
+        <span class="dot done"></span>
         <span class="card-heading">
           <div class="name">7. Demo &amp; deployment</div>
           <div class="desc">Putting the model in front of a real photo</div>
         </span>
-        <span class="status-pill upnext">In progress</span>
+        <span class="status-pill done">Done</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </summary>
       <div class="card-body">
         <ul>
           <li class="done-item">A local script (`predict.py`) that classifies one new photo on the spot — auto-picks the best available model, prints class + confidence + a VALID/INVALID call; spot-checked correct on 2 of 3 sample photos, with the one miss landing on the model's known-weak "empty" class</li>
-          <li>Sample new frames from the live camera feed</li>
-          <li>Flag "invalid" states to an operator</li>
+          <li class="done-item">Sample new frames from the live camera feed — simulated via `watch_camera_feed.py`, which watches a folder and classifies each new photo within seconds; a stand-in for a real camera connection until that's decided (see below)</li>
+          <li class="done-item">Flag "invalid" states to an operator — prints a clear `ALERT: INVALID` line; tested with a dropped-in invalid photo and it fired correctly</li>
+          <li>Not done: the *real* camera source (RTSP stream, etc.) and a *real* alerting channel (SMS/dashboard/log) instead of console-only — open deployment decisions, not yet made</li>
         </ul>
       </div>
     </details>

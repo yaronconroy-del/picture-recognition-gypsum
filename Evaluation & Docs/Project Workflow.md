@@ -192,11 +192,17 @@ It looks for `models/gypsum_classifier_split_70_30.pt` (the §12 promoted model)
 
 Spot-checked against three held-out-style photos from the dataset using the fallback (extended) model: a `valid_day` photo (89% confidence, correct), an `invalid_night` photo (98% confidence, correct), and a `valid_night` photo that came back a lower-confidence 47% `valid_night` with `empty` and `invalid_night` close behind — consistent with §9/§10's documented finding that `empty` is this model's weakest class (0% recall on 2 test images), not a bug in the script.
 
-## 14. Open Questions / Next Steps
+## 14. Simulated live feed (2026-09-22)
+
+`Model & Training/scripts/watch_camera_feed.py` — watches `pictures/incoming/` (or a folder passed as an argument), classifies every new photo dropped into it within a few seconds, and prints an `<<< ALERT: INVALID` line whenever the call comes back invalid. Reuses `predict.py`'s model loading and preprocessing directly (imported, not duplicated), so it always classifies exactly the way `predict.py` would.
+
+This is a **simulation**, not a real camera integration — a real feed would need an actual source (RTSP stream, the camera's own image export, etc.) and a real alerting channel (SMS, dashboard, log file), neither of which is decided yet (see §15). Tested locally: started the watcher, dropped in a `valid_day` and an `invalid_night` sample photo, both were picked up and classified correctly (the second correctly triggered the alert line) within the poll interval.
+
+## 15. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
 - If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
 - Run `full_pipeline.ipynb` for real in Colab to produce `gypsum_classifier_split_70_30.pt`, then re-point `predict.py`'s spot-check at it.
-- Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
-- Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.
+- Decide where the real camera feed comes from (RTSP stream, a folder the camera itself writes to, etc.) — §14's watcher is a stand-in for whatever that turns out to be.
+- Decide the real deployment target (local script, small server, edge device near the camera, etc.) and the real alerting channel (§14 only prints to the console).
