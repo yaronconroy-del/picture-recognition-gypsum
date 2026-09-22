@@ -12,6 +12,7 @@ env/
 *.ckpt
 !Model & Training/models/gypsum_classifier.pt
 !Model & Training/models/gypsum_classifier_extended_70_30.pt
+!Model & Training/models/gypsum_classifier_split_70_30.pt
 
 # OS
 .DS_Store

@@ -174,12 +174,21 @@ Ground truth throughout is the no-empty definition of "invalid" (empty folded in
 
 This is a useful negative result: with two models this close in quality but one clearly ahead, naive averaging isn't automatically better than just using the better model. A confidence-weighted ensemble (weighting no-empty split more heavily than extended, rather than 50/50) is the natural next thing to try — not implemented here. Plots: `models/boost_analysis/roc_boost.png`, `pr_boost.png`, `calibration_boost.png`.
 
-## 11. Open Questions / Next Steps
+## 12. Decision: label scheme finalized (2026-09-22)
+
+**Chosen: no-empty split (4-class)** — `valid_day` / `valid_night` / `invalid_day` / `invalid_night`, "empty filter" folded into `invalid` rather than kept as its own class.
+
+§9 made this look like a toss-up against extended (CV AUC 0.837 vs. 0.818) — but that compared each scheme against **its own** definition of "invalid," a slightly different question per model. §10's boost analysis put both schemes on the **same** ground truth (the no-empty definition) in the same run, and there no-empty split won clearly on every metric: accuracy, invalid recall, ROC AUC (0.852 vs. 0.808), and PR AP (0.805 vs. 0.769). Combined with §8's accuracy lead (77.4% vs. 72.3% CV) and §10's finding that split alone beats every ensemble attempt, the evidence converges on one answer once the comparison is made fair. Lite and no-empty collapsed were ruled out earlier by every analysis in this doc.
+
+- **Recommended operating threshold**: ~0.45–0.5 (F1-optimal values for split-based models ranged 0.435–0.541 across §9's and §10's separate runs) — re-derive the exact figure from `full_pipeline.ipynb`'s output once run for real, since that's the one consolidated, non-redundant source of truth going forward.
+- **Promoted model**: `models/gypsum_classifier_split_70_30.pt`, produced by `full_pipeline.ipynb` — kept alongside `gypsum_classifier_extended_70_30.pt` as the runner-up candidate, not deleted.
+- **Caveat, stated plainly, not buried**: still a 176-photo dataset, single seed, CPU-trained runs throughout. This is the best-supported hypothesis given everything tried, not a production-validated result — deploy it as the leading candidate and monitor, don't treat the question as permanently closed.
+
+## 13. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
-- **Decide the label scheme**: no-empty split is now the single strongest model across every analysis in this doc (accuracy in §8, and the only one not beaten by any ensemble trick in §10) — extended remains a close second, ahead on §9's AUC alone. Lite and no-empty collapsed are ruled out by everything. Still a very small dataset, single seed, CPU-only runs.
-- **Pick and ship an actual operating threshold** rather than the untuned default — §9 gives candidate values once the scheme above is decided.
 - If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
+- Build the live-demo script (a local `predict.py` that classifies one new photo — not built yet).
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.

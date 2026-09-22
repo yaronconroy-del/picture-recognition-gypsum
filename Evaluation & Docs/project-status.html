@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Gypsum Recognition Progress</title>
 <!--
   Static copy of the published Claude artifact:
@@ -279,12 +280,12 @@
 <div class="wrap">
   <p class="eyebrow">Gypsum filter recognition · AI course final project</p>
   <h1>Where the project stands</h1>
-  <p class="lede">Eight phases from raw camera photos to a deployed classifier. Five are done, two are up next, one is still ahead.</p>
+  <p class="lede">Eight phases from raw camera photos to a deployed classifier. Six are done, one is up next, one is still ahead.</p>
 
   <div class="overview">
     <div class="overview-top">
       <span class="label">Overall progress</span>
-      <span class="figure">63%<small>5 of 8 phases done</small></span>
+      <span class="figure">75%<small>6 of 8 phases done</small></span>
     </div>
     <div class="segbar" aria-hidden="true">
       <span class="done"></span>
@@ -292,7 +293,7 @@
       <span class="done"></span>
       <span class="done"></span>
       <span class="done"></span>
-      <span class="upnext"></span>
+      <span class="done"></span>
       <span></span>
       <span class="upnext"></span>
     </div>
@@ -371,8 +372,8 @@
       <div class="card-body">
         <ul>
           <li class="done-item">Camera's burned-in timestamp overlay masked out before training</li>
-          <li class="done-item">Two label schemes built from the same 176 photos: lite (3-class) and extended (5-class, day/night kept separate)</li>
-          <li class="done-item">Leakage-safe train/test splits by real capture session (not per-image), at three ratios each: 80/20, 75/25, 70/30</li>
+          <li class="done-item">Four label schemes built from the same 176 photos: lite (3-class), extended (5-class), no-empty collapsed (2-class), no-empty split (4-class)</li>
+          <li class="done-item">Leakage-safe train/test splits by real capture session (not per-image), at three ratios each: 80/20, 75/25, 70/30, plus K-fold CV</li>
           <li class="done-item">The scarce "empty" class always kept &ge;3 images in train, whatever the ratio</li>
         </ul>
       </div>
@@ -390,10 +391,11 @@
       </summary>
       <div class="card-body">
         <ul>
-          <li class="done-item">PyTorch + a pretrained backbone (MobileNetV2 / ResNet18), fine-tuned rather than trained from scratch</li>
-          <li class="done-item">Compared backbones, learning rates, and split ratios</li>
+          <li class="done-item">PyTorch + a pretrained backbone (MobileNetV2), fine-tuned rather than trained from scratch</li>
+          <li class="done-item">Compared label schemes, split ratios, and cross-validation folds across 23 configs</li>
           <li class="done-item">Ran cross-validation for a more reliable accuracy estimate than one small test set</li>
           <li class="done-item">Tried oversampling the rare "empty" class on top of class-weighted loss (result: no real improvement)</li>
+          <li class="done-item">Consolidated every experiment into one single-run notebook (`full_pipeline.ipynb`) that trains each config exactly once</li>
         </ul>
       </div>
     </details>
@@ -412,27 +414,29 @@
         <ul>
           <li class="done-item">Per-class precision/recall/F1 and confusion matrices on held-out test sessions</li>
           <li class="done-item">Cross-validation confirms it's not just a lucky single split</li>
-          <li class="done-item win">Finding: keeping day/night as separate classes (extended scheme) beats collapsing them — 72.3% vs. 63.3% accuracy in cross-validation</li>
-          <li class="done-item">"Invalid" recall (catching real faults) tracked specifically — a missed fault costs more than a false alarm</li>
+          <li class="done-item">ROC/precision-recall/calibration analysis found the default 0.5 cutoff was under-flagging real faults — tuned thresholds sit closer to ~0.3–0.5</li>
+          <li class="done-item">Tried ensembling, test-time augmentation, and probability calibration to push results further — an honest negative result, none beat the best single model</li>
+          <li class="done-item win">Finding: folding the "empty" class into "invalid" (no-empty split, 4-class) beats every other scheme on a same-ground-truth comparison — ROC AUC 0.852 vs. 0.808 for the next-best</li>
         </ul>
       </div>
     </details>
 
-    <details class="card upnext" open>
+    <details class="card done" open>
       <summary>
-        <span class="dot upnext"></span>
+        <span class="dot done"></span>
         <span class="card-heading">
           <div class="name">6. Label-scheme decision</div>
-          <div class="desc">Lock in lite vs. extended as the main model</div>
+          <div class="desc">Lock in the final class scheme for the main model</div>
         </span>
-        <span class="status-pill upnext">Up next</span>
+        <span class="status-pill done">Done</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </summary>
       <div class="card-body">
         <ul>
-          <li>Evidence favors the extended (5-class) scheme — needs a formal decision to reconsider the original 3-class simplification</li>
-          <li>Only one candidate (extended, 70/30 split) has been trained "for real" and saved so far</li>
-          <li>Still a small dataset, single seed, CPU-only run — worth confirming before fully committing</li>
+          <li class="done-item">Decided: <strong>no-empty split (4-class)</strong> — valid/invalid × day/night, "empty filter" folded into invalid rather than kept as its own class</li>
+          <li class="done-item">Resolved by comparing every scheme against the <em>same</em> ground-truth definition of "invalid," rather than each scheme's own — the apples-to-apples read that broke the earlier toss-up</li>
+          <li class="done-item">Promoted model: `gypsum_classifier_split_70_30.pt`, to be produced by `full_pipeline.ipynb`; extended (5-class) kept on as the runner-up candidate, not deleted</li>
+          <li class="done-item">Caveat stated plainly in the docs: still a 176-photo dataset, single seed, CPU-trained runs throughout</li>
         </ul>
       </div>
     </details>
@@ -468,7 +472,7 @@
       </summary>
       <div class="card-body">
         <ul>
-          <li>Working comparison slides already exist (lite vs. extended, the full optimization sweep) — not yet a polished final deck</li>
+          <li>Five comparison slide decks already exist (lite vs. extended, the full optimization sweep, the no-empty verdict, threshold tuning, ensemble/TTA/calibration) — not yet condensed into one polished final deck</li>
           <li>Extensive process documentation already exists in the workflow write-up — not yet condensed into a standalone written report</li>
         </ul>
       </div>
@@ -490,3 +494,5 @@
     } catch (e) {}
   })();
 </script>
+
+</body></html>
