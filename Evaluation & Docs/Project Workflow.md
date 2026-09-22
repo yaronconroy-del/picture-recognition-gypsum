@@ -33,10 +33,18 @@ This project comes directly from a real process at the author's plant, a **wet-p
 **The business case for this project**: filtration problems are currently caught by manual visual inspection, which is inherently intermittent (an operator can't watch the feed continuously) and inconsistent (judgment varies between operators and shifts). **Automating "valid/invalid" recognition from the existing camera feed, instead of relying on manual checks, is estimated to recover 10–15% of these losses** — by catching bad filtration sooner and more consistently than a person checking periodically can. That gap between "loss happens" and "loss is noticed" is exactly what this project's image classifier is meant to close.
 
 **Monetized, with assumptions stated explicitly** (so they can be corrected with real plant figures):
+
+*Yield loss:*
 - $2,000/hour per 1% P2O5, at a typical ~3% equivalent → **~$6,000/hour** effective yield-loss rate during a bad-filtration episode.
 - At ~6% of operating hours affected and an assumed **~8,000 operating hours/year** (~91% uptime — replace with the plant's real annual operating hours for an exact figure): ~480 affected hours/year → **~$2,880,000/year in yield-loss exposure**.
-- **Automated detection recovering 10–15% of that → roughly $288,000–$432,000/year recovered**, from the yield-loss component alone.
-- The separate ~3% additional annual downtime from equipment damage (≈240 hours/year) has its own cost, priced in lost production rather than lost yield — left in hours, not dollars, pending a $/hour-of-downtime figure.
+
+*Downtime (equipment damage):*
+- Lost-production rate during downtime: **$49,500/hour** (45 × 1,100, per the plant engineer).
+- ~3% additional annual downtime (≈240 hours/year, on the same 8,000 hr/year assumption) → **~$11,880,000/year in downtime exposure**.
+
+*Combined:*
+- **Total annual exposure: ~$14,760,000/year** (yield loss + downtime).
+- **Automated detection recovering 10–15% of that → roughly $1,476,000–$2,214,000/year recovered.**
 
 This also resolves two of this doc's earlier open questions (§15): the equipment is a **gypsum belt filter** (not a "Gibson filter" — an earlier mishearing/typo), and "invalid" specifically means **wet gypsum**, not just visual cracking/patchiness for its own sake — the visual cracking/patchiness *is* how wet, poorly-dewatered gypsum looks on camera, which is why the visual classification task is a meaningful proxy for the real problem (yield loss + downtime), not just a cosmetic check.
 
@@ -257,7 +265,7 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 - Folding "empty filter" into "invalid" measurably helps, and it's the operationally correct design, not just a statistical convenience — §12 now covers both: the empty class is tiny (8 images), *and* a live deployment doesn't need to detect "empty" at all, since the operator empties the filter themselves and already knows it. The model is meant to be toggled off for that operator-controlled window and back on once filtration resumes.
 - The naive 0.5 probability cutoff was **under-flagging real faults** — tuned thresholds (~0.3–0.5, F1-optimal) catch more actual invalid cases at a small cost in false alarms (§9).
 - Ensembling/TTA/calibration did **not** beat the single best model — reported as a straight negative result rather than spun (§10).
-- Ties back to the business case (§1.2): automated detection is estimated to recover **~$288,000–$432,000/year** in yield-loss value alone, at 10–15% recovery of the ~$2.88M/year yield-loss exposure — plus an unpriced share of the ~240 additional downtime-hours/year from equipment damage.
+- Ties back to the business case (§1.2): automated detection is estimated to recover **~$1.48M–$2.21M/year**, at 10–15% recovery of the ~$14.76M/year combined exposure (yield loss + downtime from equipment damage).
 
 ### 16.2 Limitations
 
