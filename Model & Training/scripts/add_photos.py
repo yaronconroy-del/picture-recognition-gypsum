@@ -11,6 +11,7 @@ Usage: python add_photos.py
 under "extended version".)
 """
 
+
 import csv
 import os
 import re
