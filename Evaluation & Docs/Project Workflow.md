@@ -89,9 +89,32 @@ See `Model & Training/scripts/build_dataset_index.py` and `Model & Training/note
 
 Also added: `Model & Training/notebooks/compare_label_schemes.ipynb`, an A/B test training a lite-scheme (3-class) and an extended-scheme (5-class, day/night kept separate) model under the same fixed config, to check whether the day/night simplification in the decision above actually costs anything.
 
-## 6. Open Questions / Next Steps
+## 6. Optimization sweep (2026-09-22)
+
+`Model & Training/scripts/optimize_models.py` extended the A/B test above: the same fixed config (MobileNetV2, last block fine-tuned, lr=1e-3, 10 epochs), swept across split ratio (80/20, 75/25, 70/30 — `empty` always kept ≥3 images in train regardless), K-fold cross-validation (3-fold lite, 2-fold extended — capped lower for extended because its night classes only have 2 independent sessions each), and one oversampling variant. All numbers below are read on the lite 3-class scale (extended's predictions collapsed: `valid_day`/`valid_night` → `valid`, etc.).
+
+| Variant | Accuracy | Val loss | Macro F1 | Invalid recall |
+|---|---|---|---|---|
+| Lite, 80/20 | 0.600 | – | 0.450 | 0.600 |
+| Lite, 75/25 | 0.787 | 0.494 | 0.444 | 0.600 |
+| Lite, 70/30 | 0.587 | 0.326 | 0.365 | 0.303 |
+| Lite, 3-fold CV | 0.633 ± 0.095 | 0.449 | 0.569 | 0.424 ± 0.019 |
+| Lite, 80/20 + oversampling | 0.600 | 0.480 | 0.450 | 0.600 |
+| Extended, 80/20 | 0.632 | – | 0.415 | 0.643 |
+| Extended, 75/25 | 0.722 | 0.408 | 0.460 | 0.643 |
+| Extended, 70/30 | **0.741** | 0.384 | 0.479 | **0.714** |
+| Extended, 2-fold CV | 0.723 ± 0.005 | 0.572 | 0.650 | 0.639 ± 0.075 |
+
+**Findings:**
+- **Extended (5-class) beat lite (3-class) on every ratio and in cross-validation.** The CV numbers are the most trustworthy here — averaged over independent sessions instead of one small held-out split — and they're the clearest signal: extended 72.3% ± 0.5 vs. lite 63.3% ± 9.5 accuracy. Lite's CV standard deviation (±9.5 points) is large relative to extended's (±0.5), meaning lite's single-split numbers above are much less stable session-to-session.
+- No split ratio was uniformly best for both schemes (lite peaked at 75/25 on accuracy alone; extended peaked at 70/30 on both accuracy and invalid recall) — with this little independent data, exact ratio matters less than which scheme is used.
+- The oversampling variant (`WeightedRandomSampler` on top of the existing class-weighted loss) made **no difference** on lite 80/20 — identical metrics to the plain run. Given the loss weighting already exists, resampling the same ~6 `empty` training images more often doesn't add new information; more real `empty` photos would.
+- This is evidence worth weighing against the §5 decision to simplify to 3 classes — it may be worth reconsidering, though still on a very small dataset (single seed, CPU run).
+
+## 7. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
+- Reconsider the 3-class simplification (§5) given the extended scheme's consistent edge in §6 — or collect more data before deciding.
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.
