@@ -5,11 +5,12 @@ __pycache__/
 venv/
 env/
 
-# Models / checkpoints (can get large — add exceptions here later if you want specific ones tracked)
+# Models / checkpoints (can get large — exceptions below for the ones we do want tracked)
 *.pt
 *.pth
 *.h5
 *.ckpt
+!Model & Training/models/gypsum_classifier.pt
 
 # OS
 .DS_Store
