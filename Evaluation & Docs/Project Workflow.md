@@ -152,11 +152,34 @@ Every training script decided valid-vs-invalid with a bare `argmax()` — an imp
 - **On pure invalid-vs-not ranking quality (ROC AUC), extended (5-class, empty separate) edges out no-empty split (4-class, empty merged) — 0.837 vs. 0.818** — the reverse of §8's accuracy-based ranking, where split led clearly (77.4% vs. 72.3%). This isn't a contradiction: accuracy measures the *whole* multi-class decision, AUC measures specifically how well the model ranks "invalid" over "not invalid" regardless of where the cutoff sits. The two leading schemes are close on both metrics and clearly ahead of lite and no-empty collapsed on both — the split-vs-extended choice is a genuine toss-up, not settled by this analysis alone.
 - Lite and no-empty collapsed are weaker on both accuracy (§6, §8) and ranking quality (AUC/AP here) — consistent evidence across two different kinds of analysis that they're the two schemes to rule out first.
 
-## 10. Open Questions / Next Steps
+## 10. Ensemble / TTA / calibration (2026-09-22)
+
+Three ways to push further, tried on the two closest competitors from §9 (extended CV vs. no-empty split CV): `Model & Training/scripts/boost_analysis.py`
+
+1. **Ensemble** — average the two schemes' P(invalid) per image, each from its own properly held-out CV fold model.
+2. **+ Test-time augmentation (TTA)** — average the softmax over 6 mildly-augmented views per image at inference, instead of one center crop.
+3. **+ Calibration** — fit Platt scaling on top of the ensemble+TTA score.
+
+Ground truth throughout is the no-empty definition of "invalid" (empty folded in), so extended's own number here differs slightly from its §9 figure (which used extended's own empty-is-separate ground truth) — a different question, not a contradiction.
+
+| Variant | ROC AUC | PR AP |
+|---|---|---|
+| Extended alone | 0.808 | 0.769 |
+| **No-empty split alone** | **0.852** | **0.805** |
+| Ensemble (extended + split, averaged) | 0.843 | 0.803 |
+| Ensemble + TTA | 0.847 | 0.787 |
+| Ensemble + TTA + calibration | 0.847 | 0.787 |
+
+**Finding — reported straight, not spun: none of the three techniques beat the single best model.** No-empty split alone (0.852 AUC / 0.805 AP) outperforms every ensemble variant. A plain 50/50 average pulled the stronger model (split) down toward the weaker one (extended, 0.808 alone) rather than lifting it — TTA recovered a little of that on AUC (0.843 → 0.847) but not on AP (0.803 → 0.787), and calibration (as expected — it's a monotonic rescaling) left both ranking metrics unchanged, only improving probability quality, not discrimination.
+
+This is a useful negative result: with two models this close in quality but one clearly ahead, naive averaging isn't automatically better than just using the better model. A confidence-weighted ensemble (weighting no-empty split more heavily than extended, rather than 50/50) is the natural next thing to try — not implemented here. Plots: `models/boost_analysis/roc_boost.png`, `pr_boost.png`, `calibration_boost.png`.
+
+## 11. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
-- **Decide the label scheme** given §6, §8 and §9 together: no-empty split and extended are both strong, close candidates (split wins on accuracy, extended on invalid-ranking AUC); lite and no-empty collapsed are ruled out by both. Still a very small dataset, single seed, CPU-only runs.
+- **Decide the label scheme**: no-empty split is now the single strongest model across every analysis in this doc (accuracy in §8, and the only one not beaten by any ensemble trick in §10) — extended remains a close second, ahead on §9's AUC alone. Lite and no-empty collapsed are ruled out by everything. Still a very small dataset, single seed, CPU-only runs.
 - **Pick and ship an actual operating threshold** rather than the untuned default — §9 gives candidate values once the scheme above is decided.
+- If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.
