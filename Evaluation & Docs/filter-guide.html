@@ -1,0 +1,323 @@
+<title>Filter State Field Guide</title>
+<!--
+  Static copy of the published Claude artifact:
+  https://claude.ai/artifact/DzwKbsL4k6bb5H2FEu45Ui
+  The 5 example photos are loaded from that artifact's hosted assets
+  (/_blob/... URLs), so they will only render when viewed there —
+  this file is kept here as a source/reference copy, not a standalone page.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1117;
+    --panel:#161b22;
+    --panel-border:#2a323c;
+    --text:#e6edf3;
+    --text-dim:#8b98a5;
+    --text-faint:#5c6672;
+    --valid:#3ddc97;
+    --invalid:#ff9f5a;
+    --empty:#6fa8ff;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    margin:0;
+    padding-inline:20px;
+    padding-block:40px 56px;
+  }
+  .wrap{max-width:980px;margin-inline:auto;}
+
+  header.intro{margin-bottom:40px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:clamp(28px,5vw,42px);
+    line-height:1.1;
+    letter-spacing:-0.01em;
+    margin:0 0 16px;
+    text-wrap:balance;
+  }
+  .lede{
+    font-size:16px;
+    line-height:1.6;
+    color:var(--text-dim);
+    max-width:62ch;
+    margin:0;
+  }
+
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin:0 0 16px;
+  }
+  .section-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--panel-border);
+  }
+  .section{margin-bottom:40px;}
+
+  .row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+  }
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .shot{
+    position:relative;
+    aspect-ratio:4/3;
+    overflow:hidden;
+    background:#000;
+  }
+  .shot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(0.92) contrast(1.03);
+  }
+  .shot::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(to bottom, rgba(0,0,0,0.16) 0px, rgba(0,0,0,0.16) 1px, transparent 1px, transparent 3px),
+      radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 130%);
+    pointer-events:none;
+  }
+  .osd{
+    position:absolute;
+    left:8px;
+    bottom:8px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:#f2f2f2;
+    background:rgba(0,0,0,0.55);
+    padding:3px 7px;
+    border-radius:4px;
+    letter-spacing:0.02em;
+  }
+  .status{
+    position:absolute;
+    top:10px;
+    right:10px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:#f2f2f2;
+    background:rgba(0,0,0,0.55);
+    padding:4px 9px 4px 7px;
+    border-radius:999px;
+  }
+  .dot{
+    width:8px;height:8px;border-radius:50%;
+    box-shadow:0 0 8px 1px currentColor;
+    flex:none;
+  }
+  .dot.valid{background:var(--valid);color:var(--valid);}
+  .dot.invalid{background:var(--invalid);color:var(--invalid);}
+  .dot.empty{background:var(--empty);color:var(--empty);}
+
+  .card-body{padding:18px 18px 20px;}
+  .names{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .name-en{
+    font-weight:600;
+    font-size:16px;
+  }
+  .name-he{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-faint);
+    direction:rtl;
+  }
+  .card-body p{
+    margin:0;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--text-dim);
+  }
+
+  .empty-section .row{grid-template-columns:minmax(260px,360px) 1fr;align-items:stretch;}
+  .empty-section .card{grid-column:1 / -1;display:grid;grid-template-columns:minmax(220px,320px) 1fr;}
+  .empty-section .shot{aspect-ratio:auto;height:100%;min-height:180px;}
+  .empty-section .card-body{display:flex;flex-direction:column;justify-content:center;}
+  @media (max-width:620px){
+    .empty-section .card{grid-template-columns:1fr;}
+    .empty-section .shot{aspect-ratio:4/3;}
+  }
+
+  table.legend{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+  }
+  table.legend th, table.legend td{
+    text-align:left;
+    padding:10px 14px;
+    border-bottom:1px solid var(--panel-border);
+    vertical-align:top;
+  }
+  table.legend th{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    font-weight:500;
+  }
+  table.legend td{color:var(--text-dim);}
+  table.legend td.state{
+    color:var(--text);
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .legend-wrap{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    padding:6px 16px;
+    overflow-x:auto;
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="intro">
+    <p class="eyebrow">Gypsum filter · camera reference</p>
+    <h1>Five states, one camera</h1>
+    <p class="lede">The filter camera only ever tells you five things. Here's what each one actually looks like in a real frame, and the one visual cue that gives it away.</p>
+  </header>
+
+  <section class="section">
+    <p class="section-label">By day</p>
+    <div class="row">
+      <article class="card">
+        <div class="shot">
+          <img src="/_blob/da7cdec7dad745e7fd1884e8f2e6e051" alt="Valid gypsum cake on the filter, photographed during the day">
+          <span class="status"><span class="dot valid"></span>Valid</span>
+          <span class="osd">תקין יום · day</span>
+        </div>
+        <div class="card-body">
+          <div class="names"><span class="name-en">Valid — Day</span><span class="name-he">תקין יום</span></div>
+          <p>The daylight "nothing to see here" shot. One even, ridged blanket of cake runs across every sector with no gaps — the texture looks the same from the near edge to the far edge.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot">
+          <img src="/_blob/56e81a3a50bf399b8823d240ecd46b8d" alt="Invalid gypsum cake on the filter, photographed during the day, with visible cracking">
+          <span class="status"><span class="dot invalid"></span>Invalid</span>
+          <span class="osd">לא תקין יום · day</span>
+        </div>
+        <div class="card-body">
+          <div class="names"><span class="name-en">Invalid — Day</span><span class="name-he">לא תקין יום</span></div>
+          <p>The tell is cracking. Pale fracture lines run across one or more sectors where the cake has pulled apart instead of forming a solid sheet, sometimes with bare patches underneath.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">By night</p>
+    <div class="row">
+      <article class="card">
+        <div class="shot">
+          <img src="/_blob/84439d94f44cac3fd45558023b9978e8" alt="Valid gypsum cake on the filter, photographed at night under floodlight">
+          <span class="status"><span class="dot valid"></span>Valid</span>
+          <span class="osd">תקין לילה · night</span>
+        </div>
+        <div class="card-body">
+          <div class="names"><span class="name-en">Valid — Night</span><span class="name-he">תקין לילה</span></div>
+          <p>Same healthy cake, now lit by the floodlight instead of the sun — expect a hot glare in one corner and warmer tones. Underneath the glare, it's still one continuous surface, no breaks.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot">
+          <img src="/_blob/b600a617ef91aa639262412957c06f34" alt="Invalid gypsum cake on the filter, photographed at night under floodlight, with visible cracking">
+          <span class="status"><span class="dot invalid"></span>Invalid</span>
+          <span class="osd">לא תקין לילה · night</span>
+        </div>
+        <div class="card-body">
+          <div class="names"><span class="name-en">Invalid — Night</span><span class="name-he">לא תקין לילה</span></div>
+          <p>Harder to catch under floodlight, but the same light-colored fracture lines still cut through the dark cake — look for them near the brightest part of the frame, where contrast is highest.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section empty-section">
+    <p class="section-label">Either time</p>
+    <div class="row">
+      <article class="card">
+        <div class="shot">
+          <img src="/_blob/d40c487877fc1aa1b7fec3d716e5a144" alt="Empty gypsum filter with no cake material on the surface">
+          <span class="status"><span class="dot empty"></span>Empty</span>
+          <span class="osd">מסנן ריק · empty</span>
+        </div>
+        <div class="card-body">
+          <div class="names"><span class="name-en">Empty Filter</span><span class="name-he">מסנן ריק</span></div>
+          <p>No cake at all — just the bare, smooth filter surface with none of the ridged texture the other four states share. This is usually the filter between cycles, not a bad cake.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" style="margin-bottom:0;">
+    <p class="section-label">Quick reference</p>
+    <div class="legend-wrap">
+      <table class="legend">
+        <thead>
+          <tr><th>State</th><th>Coverage</th><th>Surface</th><th>Lighting tell</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="state" style="color:var(--valid)">Valid</td><td>Full, edge to edge</td><td>Even ridges, no gaps</td><td>Day: flat haze · Night: glare, still even underneath</td></tr>
+          <tr><td class="state" style="color:var(--invalid)">Invalid</td><td>Patchy or torn</td><td>Pale cracks, exposed patches</td><td>Day: cracks read dark-on-light · Night: cracks read light-on-dark</td></tr>
+          <tr><td class="state" style="color:var(--empty)">Empty</td><td>None</td><td>Bare, smooth, no ridges</td><td>Not split by day/night</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,467 @@
+<title>Gypsum Recognition Progress</title>
+<!--
+  Static copy of the published Claude artifact:
+  https://claude.ai/artifact/MJYUPDuffnTuBc2b97TBXd
+  Fully self-contained (no hosted assets) — safe to open directly in a browser.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d1117;
+    --panel:#161b22;
+    --panel-hover:#1c222b;
+    --panel-border:#2a323c;
+    --text:#e6edf3;
+    --text-dim:#8b98a5;
+    --text-faint:#5c6672;
+    --done:#3ddc97;
+    --done-dim:#1c3f34;
+    --upnext:#ffce54;
+    --upnext-dim:#453816;
+    --todo:#6b7684;
+    --mono:'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+    --sans:'Inter', system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    margin:0;
+    padding-inline:20px;
+    padding-block:36px 60px;
+  }
+  .wrap{max-width:840px;margin-inline:auto;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin:0 0 12px;
+  }
+  h1{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:clamp(26px,4.6vw,38px);
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    margin:0 0 10px;
+    text-wrap:balance;
+  }
+  .lede{
+    font-size:15.5px;
+    line-height:1.6;
+    color:var(--text-dim);
+    max-width:60ch;
+    margin:0 0 32px;
+  }
+
+  /* ---- progress overview ---- */
+  .overview{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    padding:20px 22px 22px;
+    margin-bottom:28px;
+  }
+  .overview-top{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .overview-top .label{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .overview-top .figure{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:22px;
+    font-variant-numeric:tabular-nums;
+  }
+  .overview-top .figure small{
+    font-family:var(--sans);
+    font-weight:500;
+    font-size:13px;
+    color:var(--text-dim);
+    margin-left:6px;
+  }
+  .segbar{
+    display:flex;
+    gap:4px;
+    margin-bottom:6px;
+  }
+  .segbar span{
+    flex:1;
+    height:8px;
+    border-radius:3px;
+    background:var(--panel-border);
+  }
+  .segbar span.done{background:var(--done);}
+  .segbar span.upnext{background:var(--upnext);}
+  .seg-labels{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--text-faint);
+    letter-spacing:0.02em;
+  }
+
+  /* ---- filter toggle ---- */
+  .filter-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin:22px 0 16px;
+  }
+  .section-label{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin:0;
+  }
+  .switch-label{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:13.5px;
+    color:var(--text-dim);
+    cursor:pointer;
+    user-select:none;
+  }
+  .switch-label input{
+    position:absolute;
+    opacity:0;
+    width:1px;height:1px;
+  }
+  .track{
+    width:36px;height:20px;
+    border-radius:999px;
+    background:var(--panel-border);
+    border:1px solid var(--panel-border);
+    position:relative;
+    flex:none;
+    transition:background .15s ease;
+  }
+  .track::after{
+    content:"";
+    position:absolute;
+    top:2px;left:2px;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--text-dim);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .switch-label input:checked + .track{background:var(--upnext-dim);border-color:var(--upnext);}
+  .switch-label input:checked + .track::after{transform:translateX(16px);background:var(--upnext);}
+  .switch-label input:focus-visible + .track{outline:2px solid var(--text-dim);outline-offset:2px;}
+
+  /* ---- phase cards ---- */
+  .phases{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .card > summary{
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    cursor:pointer;
+  }
+  .card > summary::-webkit-details-marker{display:none;}
+  .card > summary:hover{background:var(--panel-hover);}
+  .dot{
+    width:9px;height:9px;border-radius:50%;
+    flex:none;
+    box-shadow:0 0 7px 0 currentColor;
+  }
+  .dot.done{background:var(--done);color:var(--done);}
+  .dot.upnext{background:var(--upnext);color:var(--upnext);}
+  .dot.todo{background:var(--todo);color:transparent;box-shadow:none;}
+
+  .card-heading{flex:1;min-width:0;}
+  .card-heading .name{
+    font-weight:600;
+    font-size:15px;
+  }
+  .card-heading .desc{
+    font-size:13px;
+    color:var(--text-dim);
+    margin-top:1px;
+  }
+  .status-pill{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:999px;
+    flex:none;
+    white-space:nowrap;
+  }
+  .status-pill.done{color:var(--done);background:var(--done-dim);}
+  .status-pill.upnext{color:var(--upnext);background:var(--upnext-dim);}
+  .status-pill.todo{color:var(--text-dim);background:var(--bg);border:1px solid var(--panel-border);}
+
+  .chev{
+    flex:none;
+    width:14px;height:14px;
+    color:var(--text-faint);
+    transition:transform .15s ease;
+  }
+  .card[open] .chev{transform:rotate(90deg);}
+
+  .card-body{
+    padding:2px 16px 16px 37px;
+  }
+  .card-body ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .card-body li{
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--text-dim);
+    padding-left:18px;
+    position:relative;
+  }
+  .card-body li::before{
+    content:"";
+    position:absolute;
+    left:0;top:7px;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--panel-border);
+  }
+  .card.done .card-body li::before{background:var(--done);}
+  .card-body li.done-item{color:var(--text-faint);text-decoration:line-through;text-decoration-color:var(--panel-border);}
+  .card-body li.done-item::before{background:var(--done);}
+
+  /* hide-done mode */
+  .phases.hide-done .card.done{display:none;}
+
+  footer{
+    margin-top:30px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--text-faint);
+  }
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Gypsum filter recognition · AI course final project</p>
+  <h1>Where the project stands</h1>
+  <p class="lede">Seven phases from raw camera photos to a working classifier. Two are done, one is up next, four are still ahead.</p>
+
+  <div class="overview">
+    <div class="overview-top">
+      <span class="label">Overall progress</span>
+      <span class="figure">29%<small>2 of 7 phases done</small></span>
+    </div>
+    <div class="segbar" aria-hidden="true">
+      <span class="done"></span>
+      <span class="done"></span>
+      <span class="upnext"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="seg-labels">
+      <span>Collect</span>
+      <span>Set up</span>
+      <span>Prep</span>
+      <span>Balance</span>
+      <span>Train</span>
+      <span>Evaluate</span>
+      <span>Deploy</span>
+    </div>
+  </div>
+
+  <div class="filter-row">
+    <p class="section-label">Project phases</p>
+    <label class="switch-label" for="hide-done">
+      <input type="checkbox" id="hide-done">
+      <span class="track"></span>
+      Show only what's left
+    </label>
+  </div>
+
+  <div class="phases" id="phases">
+
+    <details class="card done" open>
+      <summary>
+        <span class="dot done"></span>
+        <span class="card-heading">
+          <div class="name">1. Data collection</div>
+          <div class="desc">Photos captured and sorted by hand</div>
+        </span>
+        <span class="status-pill done">Done</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li class="done-item">176 photos captured from the filter's camera (WhatsApp exports), across day and night conditions</li>
+          <li class="done-item">Manually sorted into 5 classes: valid day/night, invalid day/night, empty filter</li>
+          <li class="done-item">Filenames randomized (img_&lt;id&gt;.jpeg) with a manifest back to the originals — no ordering that leaks the label</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card done">
+      <summary>
+        <span class="dot done"></span>
+        <span class="card-heading">
+          <div class="name">2. Project setup</div>
+          <div class="desc">Repo, docs, and dataset tooling in place</div>
+        </span>
+        <span class="status-pill done">Done</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li class="done-item">Folder structure organized by area (dataset/training vs. evaluation/docs)</li>
+          <li class="done-item">Workflow write-up documenting the idea, dataset, and plan</li>
+          <li class="done-item">Project pushed to a private GitHub repo, under version control</li>
+          <li class="done-item">A reusable script for adding new photos to the dataset consistently</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card upnext" open>
+      <summary>
+        <span class="dot upnext"></span>
+        <span class="card-heading">
+          <div class="name">3. Preprocessing</div>
+          <div class="desc">Getting the raw photos ready to train on</div>
+        </span>
+        <span class="status-pill upnext">Up next</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li>Crop or mask the camera's burned-in timestamp overlay</li>
+          <li>Resize and normalize all images to one resolution</li>
+          <li>Decide the final label scheme (5-way vs. condition + time-of-day)</li>
+          <li>Split into train / validation / test sets, without leaking near-duplicate frames across splits</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <span class="dot todo"></span>
+        <span class="card-heading">
+          <div class="name">4. Class balance</div>
+          <div class="desc">Only 8 "empty filter" photos vs. 30–62 elsewhere</div>
+        </span>
+        <span class="status-pill todo">To do</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li>Decide an augmentation strategy for the smaller classes</li>
+          <li>Collect more "empty filter" photos, ideally in both day and night</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <span class="dot todo"></span>
+        <span class="card-heading">
+          <div class="name">5. Model training</div>
+          <div class="desc">The Python classifier itself</div>
+        </span>
+        <span class="status-pill todo">To do</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li>Choose an architecture (transfer-learned CNN vs. a lightweight custom model)</li>
+          <li>Write the Python training pipeline</li>
+          <li>Train and save a first model version</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <span class="dot todo"></span>
+        <span class="card-heading">
+          <div class="name">6. Evaluation</div>
+          <div class="desc">Measuring how well the model actually works</div>
+        </span>
+        <span class="status-pill todo">To do</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li>Accuracy, precision, and recall per class</li>
+          <li>Check day-vs-night generalization specifically</li>
+          <li>Prioritize catching "invalid" cases — a missed fault costs more than a false alarm</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="card">
+      <summary>
+        <span class="dot todo"></span>
+        <span class="card-heading">
+          <div class="name">7. Deployment</div>
+          <div class="desc">Putting the model on the live camera feed</div>
+        </span>
+        <span class="status-pill todo">To do</span>
+        <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="card-body">
+        <ul>
+          <li>Sample new frames from the live camera feed</li>
+          <li>Flag "invalid" states to an operator</li>
+          <li>Feed misclassified real-world frames back into the dataset over time</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+
+  <footer>Last updated 2026-09-22</footer>
+</div>
+
+<script>
+  (function(){
+    try {
+      var toggle = document.getElementById('hide-done');
+      var phases = document.getElementById('phases');
+      toggle.addEventListener('change', function(){
+        phases.classList.toggle('hide-done', toggle.checked);
+      });
+    } catch (e) {}
+  })();
+</script>
