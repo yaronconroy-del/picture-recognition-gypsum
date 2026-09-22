@@ -10,5 +10,6 @@ What's here:
 - `scripts/build_dataset_index.py` — builds `dataset_split.csv`, the leakage-safe train/test split (by real capture session, not per-image).
 - `dataset_split.csv` — generated output of the script above; what the notebook reads.
 - `notebooks/train_and_evaluate.ipynb` — the actual model: data loading, augmentation, a pretrained-backbone classifier, a small hyperparameter comparison, evaluation on the held-out test set, and export. Runs in Google Colab (see the notebook's own setup cell for how to clone this private repo there).
-- `models/` — not populated yet; where the trained weights land after running the notebook (see `models/README.md`).
+- `scripts/train_and_evaluate.py` — the same pipeline as the notebook above, as a plain script (`--quick` for a fast local CPU smoke test; drop `--quick` for a real run, though Colab's GPU is much faster). **Keep this and the notebook in sync** — when the modeling logic changes, mirror the change into both files, not just one.
+- `models/` — not populated yet; where the trained weights land after running the notebook or the script (see `models/README.md`).
 - `context/` — empty for now. Drop in notes on your training environment, model choices, hyperparameters, etc. as you go.
