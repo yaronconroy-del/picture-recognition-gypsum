@@ -184,11 +184,19 @@ This is a useful negative result: with two models this close in quality but one 
 - **Promoted model**: `models/gypsum_classifier_split_70_30.pt`, produced by `full_pipeline.ipynb` — kept alongside `gypsum_classifier_extended_70_30.pt` as the runner-up candidate, not deleted.
 - **Caveat, stated plainly, not buried**: still a 176-photo dataset, single seed, CPU-trained runs throughout. This is the best-supported hypothesis given everything tried, not a production-validated result — deploy it as the leading candidate and monitor, don't treat the question as permanently closed.
 
-## 13. Open Questions / Next Steps
+## 13. Live-demo script (2026-09-22)
+
+`Model & Training/scripts/predict.py` — classifies one photo from the command line (`python predict.py path/to/photo.jpeg`): prints the predicted class, confidence, and the operator-facing VALID/INVALID call (an "empty" prediction counts as INVALID, per §12). Preprocessing matches training exactly (timestamp masking, resize/crop, ImageNet normalization).
+
+It looks for `models/gypsum_classifier_split_70_30.pt` (the §12 promoted model) first and falls back to `gypsum_classifier_extended_70_30.pt` (the only model actually trained for real so far) if the promoted one hasn't been produced yet — so the script works today and needs no changes once `full_pipeline.ipynb` is run for real.
+
+Spot-checked against three held-out-style photos from the dataset using the fallback (extended) model: a `valid_day` photo (89% confidence, correct), an `invalid_night` photo (98% confidence, correct), and a `valid_night` photo that came back a lower-confidence 47% `valid_night` with `empty` and `invalid_night` close behind — consistent with §9/§10's documented finding that `empty` is this model's weakest class (0% recall on 2 test images), not a bug in the script.
+
+## 14. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
 - If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
-- Build the live-demo script (a local `predict.py` that classifies one new photo — not built yet).
+- Run `full_pipeline.ipynb` for real in Colab to produce `gypsum_classifier_split_70_30.pt`, then re-point `predict.py`'s spot-check at it.
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.

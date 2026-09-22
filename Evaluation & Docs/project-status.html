@@ -280,7 +280,7 @@
 <div class="wrap">
   <p class="eyebrow">Gypsum filter recognition · AI course final project</p>
   <h1>Where the project stands</h1>
-  <p class="lede">Eight phases from raw camera photos to a deployed classifier. Six are done, one is up next, one is still ahead.</p>
+  <p class="lede">Eight phases from raw camera photos to a deployed classifier. Six are done, two are in progress.</p>
 
   <div class="overview">
     <div class="overview-top">
@@ -441,19 +441,19 @@
       </div>
     </details>
 
-    <details class="card">
+    <details class="card upnext" open>
       <summary>
-        <span class="dot todo"></span>
+        <span class="dot upnext"></span>
         <span class="card-heading">
           <div class="name">7. Demo &amp; deployment</div>
           <div class="desc">Putting the model in front of a real photo</div>
         </span>
-        <span class="status-pill todo">To do</span>
+        <span class="status-pill upnext">In progress</span>
         <svg class="chev" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </summary>
       <div class="card-body">
         <ul>
-          <li>A local script that classifies one new photo on the spot — for demoing live to the lecturer</li>
+          <li class="done-item">A local script (`predict.py`) that classifies one new photo on the spot — auto-picks the best available model, prints class + confidence + a VALID/INVALID call; spot-checked correct on 2 of 3 sample photos, with the one miss landing on the model's known-weak "empty" class</li>
           <li>Sample new frames from the live camera feed</li>
           <li>Flag "invalid" states to an operator</li>
         </ul>
