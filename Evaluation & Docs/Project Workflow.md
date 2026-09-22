@@ -47,9 +47,23 @@ Day and night are collapsed (see the decision in §5); each file here is a copy 
 - **Class imbalance**: "empty filter" has only 8 images vs. 30–62 for the other classes, and it isn't split into day/night. This will need attention (oversampling, augmentation, or collecting more empty-filter shots, ideally for both day and night).
 - **Burned-in timestamp overlay**: every image has a date/time stamp in the top-right corner. This is not part of the actual scene and should either be cropped out or masked before training so the model doesn't learn to key off it.
 - **Steam/dust obstruction**: the process itself produces mist that partially obscures the filter in many shots — this is signal the model needs to be robust to, not noise to remove.
-- **Day/night lighting is a major visual shift**: night shots have strong localized glare from floodlights; day shots have flatter, hazier lighting. Whatever splitting/augmentation strategy is used should account for this so the model doesn't just learn "day vs. night" instead of "valid vs. invalid."
+- **Day/night lighting is a major visual shift**: night shots have strong localized glare from floodlights; day shots have flatter, hazier lighting. Whatever splitting/augmentation strategy is used should account for this so the model doesn't just learn "day vs. night" instead of "valid vs. invalid." — **but see §3.4: "day"/"night" don't appear to mean literal time of day.**
 - **Fixed camera angle**: all images appear to come from the same mounted camera/angle, which simplifies the problem (no need for viewpoint invariance) but means the model may be specific to this one camera installation.
 - **Source quality**: images are WhatsApp exports (compressed JPEGs, not original camera resolution), which is worth keeping in mind for image-quality-sensitive techniques.
+
+### 3.4 "day"/"night" may not mean time of day (discovered 2026-09-22)
+
+Cross-referencing the manifest's recovered original capture timestamps against the `day`/`night` folder each photo came from turned up something unexpected: `day`- and `night`-labeled photos are **interleaved within the same few seconds** of each other, not hours apart. Example, from 2026-09-09:
+
+```
+11:29:43  day
+11:29:47  night
+11:29:49  day
+11:29:50  day
+11:29:56  night
+```
+
+All around 11:29 **AM** — clearly not solar daytime vs. nighttime. Whatever these two folders actually distinguish (two camera angles? flash vs. no flash? a labeling judgment call based on how the photo *looked*, made while manually sorting?), it isn't literal time-of-day. The visual difference between the folders (flat daylight-like vs. glare-heavy floodlit-like) is still real and still a valid thing for a model to learn — it just isn't explained by the clock. **Worth confirming with whoever collected/sorted the photos before stating in the final report that this is a day/night split.**
 
 ## 4. Intended Workflow
 
@@ -73,8 +87,11 @@ Day and night are collapsed (see the decision in §5); each file here is a copy 
 
 See `Model & Training/scripts/build_dataset_index.py` and `Model & Training/notebooks/train_and_evaluate.ipynb` for the implementation.
 
+Also added: `Model & Training/notebooks/compare_label_schemes.ipynb`, an A/B test training a lite-scheme (3-class) and an extended-scheme (5-class, day/night kept separate) model under the same fixed config, to check whether the day/night simplification in the decision above actually costs anything.
+
 ## 6. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
+- Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.
