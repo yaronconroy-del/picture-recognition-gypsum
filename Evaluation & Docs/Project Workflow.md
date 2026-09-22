@@ -4,7 +4,7 @@
 
 The goal of this project is to build an **image classification model that looks at a camera feed of a gypsum filter and automatically determines whether the filter/cake is in a normal ("valid") or abnormal ("invalid") state**, so that problems can be caught from the picture instead of (or in addition to) manual visual inspection.
 
-The source images are frames captured from a **fixed industrial CCTV-style camera mounted above a gypsum dewatering filter** (a rotary/table vacuum filter that separates gypsum slurry into a solid "cake" on a segmented filter surface). Each frame has a timestamp burned into the top-right corner by the camera/DVR (e.g. `2026-09-06 17:42:24`), and the scene is often partly obscured by steam/dust/mist, which is a normal part of the process environment, not a camera defect.
+The source images are frames captured from a **fixed industrial CCTV-style camera mounted above a gypsum belt filter** — a continuous belt vacuum filter that washes and dewaters the gypsum by-product from phosphoric acid production, separating it into a solid "cake" on the belt surface (see §1.2 for the full process context). Each frame has a timestamp burned into the top-right corner by the camera/DVR (e.g. `2026-09-06 17:42:24`), and the scene is often partly obscured by steam/dust/mist, which is a normal part of the process environment, not a camera defect.
 
 Visually, across the sample images:
 - A **normal ("תקין" / valid) cake** looks like an even, continuous layer of material covering the filter's sectors, with a fairly uniform ridged/striped texture.
@@ -20,7 +20,19 @@ A short survey of existing approaches to similar problems, done to check this pr
 - **Class imbalance between "normal" and "defect" is treated as the norm, not the exception, in industrial defect detection** — because in a working process, defects genuinely are rarer than normal output. One cited industrial dataset example splits 84% nominal / 12% / 4% across defect types ([Tackling class imbalance in computer vision: a contemporary review](https://link.springer.com/article/10.1007/s10462-023-10557-6)). This project's "empty filter" class (8 of 176 images, 4.5%) sits in the same range, and the standard mitigations the literature points to — cost-sensitive/class-weighted loss and resampling — are exactly what this project tried (§4 step 3, and the `WeightedRandomSampler` variant in §6), including the honest negative finding that resampling added nothing once weighted loss was already in place, which matches the literature's framing of these as alternative, not strictly additive, techniques.
 - **Reported accuracy in comparable published work is high (often 95%+) but on datasets one to three orders of magnitude larger than this one** — e.g. a transfer-learning assembly-defect inspection system reaching 98.67% accuracy ([A Deep Transfer Learning-Based Visual Inspection System for Assembly Defects](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11945499/)) was trained on thousands of labeled images per station, not 176 total across 4–5 classes. This project's own numbers (§8: ~77% CV accuracy on the leading scheme) should be read against that gap, not against the field's best-case numbers — the caveat already stated plainly in §12 ("still a 176-photo dataset... not a production-validated result") is consistent with what the literature would predict for a dataset this size, not a sign something went wrong.
 
-No existing published work was found on this exact equipment (gypsum dewatering filter cake inspection specifically) — the closest matches are the general "surface/assembly defect via transfer-learned CNN" literature above, which is why this project's approach follows that pattern rather than a filter-specific one.
+No existing published work was found on this exact equipment (gypsum belt filter cake inspection specifically) — the closest matches are the general "surface/assembly defect via transfer-learned CNN" literature above, which is why this project's approach follows that pattern rather than a filter-specific one.
+
+### 1.2 Background and motivation (2026-09-22)
+
+This project comes directly from a real process at the author's plant, a **wet-process phosphoric acid** producer: phosphate rock reacts with sulfuric acid to produce phosphoric acid, with **gypsum as a by-product**. The gypsum still carries residual phosphoric acid, so it's washed with water and then **dewatered on the belt filter** this project's camera watches, to recover as much of that phosphoric acid as economically possible before the gypsum is discarded.
+
+**"Invalid" means wet gypsum** — the cake didn't dewater properly. This has two separate costs:
+1. **Yield loss** — phosphoric acid trapped in gypsum that's still wet doesn't get recovered, and is lost with the discarded gypsum. **Every 1% of phosphoric acid remaining in the gypsum costs roughly $2,000/hour.** On an annual basis this typically runs to a loss equivalent to about 3% of throughput, with bad-filtration episodes accounting for roughly 6% of downtime.
+2. **Equipment damage / downtime** — wet gypsum can damage downstream equipment, adding a further ~3% of annual downtime on top of the yield-loss figure above.
+
+**The business case for this project**: filtration problems are currently caught by manual visual inspection, which is inherently intermittent (an operator can't watch the feed continuously) and inconsistent (judgment varies between operators and shifts). **Automating "valid/invalid" recognition from the existing camera feed, instead of relying on manual checks, is estimated to recover 10–15% of these losses** — by catching bad filtration sooner and more consistently than a person checking periodically can. That gap between "loss happens" and "loss is noticed" is exactly what this project's image classifier is meant to close.
+
+This also resolves two of this doc's earlier open questions (§15): the equipment is a **gypsum belt filter** (not a "Gibson filter" — an earlier mishearing/typo), and "invalid" specifically means **wet gypsum**, not just visual cracking/patchiness for its own sake — the visual cracking/patchiness *is* how wet, poorly-dewatered gypsum looks on camera, which is why the visual classification task is a meaningful proxy for the real problem (yield loss + downtime), not just a cosmetic check.
 
 ## 2. Current State of the Project
 
@@ -219,8 +231,8 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 
 ## 15. Open Questions / Next Steps
 
-- Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
-- Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
+- ~~Confirm the exact equipment name/process and what "invalid" means beyond visual cracking/patchiness~~ — answered, see §1.2: it's a gypsum belt filter, and "invalid" means wet gypsum (yield loss + equipment damage risk).
+- Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day, and §3.5's EDA rules out a simple whole-image-brightness explanation too. Still unresolved.
 - If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
 - Run `full_pipeline.ipynb` for real in Colab to produce `gypsum_classifier_split_70_30.pt`, then re-point `predict.py`'s spot-check at it.
 - Decide where the real camera feed comes from (RTSP stream, a folder the camera itself writes to, etc.) — §14's watcher is a stand-in for whatever that turns out to be.

@@ -1,6 +1,6 @@
 # Picture Recognition — Gypsum Filter
 
-Chief-of-staff folder for a university-level AI course final project: an image classifier that reads a gypsum dewatering filter's camera feed and tells whether the cake is valid, invalid, or the filter is empty.
+Chief-of-staff folder for a university-level AI course final project: an image classifier that reads a gypsum belt filter's camera feed and tells whether the cake is valid or invalid (wet gypsum) — see `Evaluation & Docs/Project Workflow.md` §1.2 for the real yield-loss/downtime business case behind it.
 
 ## Areas
 
