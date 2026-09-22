@@ -134,10 +134,29 @@ A 4th label scheme: "empty filter" redefined as a kind of **invalid** rather tha
 - Every 80/20 single-split number in this table uses a very small test set (11–16 images) and should be read with caution; CV is the number to trust.
 - Net effect of the "empty = invalid" reframing: it appears to genuinely help, not just shuffle the same information around — likely because the model no longer has to learn a 3rd/5th class from only 6–8 examples, and "empty" and "invalid" probably share some real visual similarity (bare or torn filter surface) that the model can exploit once they're merged.
 
-## 9. Open Questions / Next Steps
+## 9. Threshold / calibration / ROC-PR analysis (2026-09-22)
+
+Every training script decided valid-vs-invalid with a bare `argmax()` — an implicit 0.5 probability cutoff that was never chosen deliberately or checked. `Model & Training/scripts/threshold_analysis.py` re-trained **all 23 individual configs** trained across this project (every ratio split × every CV fold, all 4 schemes), captured full probabilities instead of just the winning class, and for each computed: a ROC curve + AUC, a precision-recall curve + average precision (AP), a calibration curve, and two candidate best thresholds for flagging "invalid" — **Youden's J** (balances both error types) and the **F1-optimal** threshold (tuned specifically for the invalid class). CV configs pool every fold's held-out predictions first, same as §6/§8.
+
+| Config (CV = pooled) | ROC AUC | PR AP | Youden threshold | F1-optimal threshold |
+|---|---|---|---|---|
+| Lite, CV | 0.763 | 0.653 | 0.178 | 0.109 |
+| Extended, CV | **0.837** | 0.752 | 0.302 | 0.302 |
+| No-empty collapsed, CV | 0.723 | 0.720 | 0.526 | 0.168 |
+| No-empty split, CV | 0.818 | **0.768** | 0.466 | 0.466 |
+
+(Full 17-row table, including every single ratio split, is in `models/threshold_analysis/threshold_results.json`; plots — `roc_overlay.png`, `pr_overlay.png`, `calibration_overlay.png` — overlay all 17 configs each.)
+
+**Findings:**
+- **The default 0.5 cutoff has been under-flagging real faults the whole time.** Nearly every config's optimal threshold — by either method — is below 0.5. For the four CV rows above, every F1-optimal threshold is below 0.5 (0.109–0.466), and 3 of 4 Youden thresholds are too. Concretely: with the extended CV model, switching from the untuned default to the F1-optimal threshold (0.302) would flag more real invalid cases as invalid, at the cost of a few more false alarms — exactly the trade this project's docs have said is worth making (§6: "a missed invalid costs more than a false alarm").
+- **On pure invalid-vs-not ranking quality (ROC AUC), extended (5-class, empty separate) edges out no-empty split (4-class, empty merged) — 0.837 vs. 0.818** — the reverse of §8's accuracy-based ranking, where split led clearly (77.4% vs. 72.3%). This isn't a contradiction: accuracy measures the *whole* multi-class decision, AUC measures specifically how well the model ranks "invalid" over "not invalid" regardless of where the cutoff sits. The two leading schemes are close on both metrics and clearly ahead of lite and no-empty collapsed on both — the split-vs-extended choice is a genuine toss-up, not settled by this analysis alone.
+- Lite and no-empty collapsed are weaker on both accuracy (§6, §8) and ranking quality (AUC/AP here) — consistent evidence across two different kinds of analysis that they're the two schemes to rule out first.
+
+## 10. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day.
-- **Decide the label scheme** given §6 and §8 together: no-empty split (4-class) is the current leader, ahead of extended (5-class), ahead of lite (3-class) — still on a very small dataset, single seed, CPU-only runs.
+- **Decide the label scheme** given §6, §8 and §9 together: no-empty split and extended are both strong, close candidates (split wins on accuracy, extended on invalid-ranking AUC); lite and no-empty collapsed are ruled out by both. Still a very small dataset, single seed, CPU-only runs.
+- **Pick and ship an actual operating threshold** rather than the untuned default — §9 gives candidate values once the scheme above is decided.
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.
