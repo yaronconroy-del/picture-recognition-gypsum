@@ -9,7 +9,7 @@ Use this when the user says they've added new filter-camera photos and wants the
 
 ## Steps
 
-1. **Confirm the photos are already sorted by class.** New raw photos must be manually placed into the matching class folder under `Model & Training/pictures/`:
+1. **Confirm the photos are already sorted by class.** New raw photos must be manually placed into the matching class folder under `Model & Training/pictures/extended version/`:
    - `תקין יום` — valid, day
    - `תקין לילה` — valid, night
    - `לא תקין יום` — invalid, day
@@ -26,5 +26,6 @@ Use this when the user says they've added new filter-camera photos and wants the
 3. **It automatically:**
    - Renames each new file to `img_<8 random hex chars>.<ext>`, checking uniqueness against every existing filename in the dataset (not just its own folder), so the same random-ID convention from the existing 176 photos is preserved — no sequential runs, no per-folder number blocks.
    - Appends `class_folder, original_filename, new_filename` rows to `Evaluation & Docs/context/rename_manifest.csv` for the new files only (existing manifest rows are untouched).
+   - Copies each renamed file into the matching `Model & Training/pictures/simple version/<valid|invalid|empty>/` folder, so both dataset versions stay in sync.
 
 4. **Report back** the per-class count of newly added files (the script prints each rename as it happens).

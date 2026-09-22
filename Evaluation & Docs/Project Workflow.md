@@ -14,25 +14,35 @@ Visually, across the sample images:
 
 ## 2. Current State of the Project
 
-Right now the project is a **raw, manually-sorted image dataset** — there is no code, model, or pipeline yet. All content lives under [pictures/](pictures/), exported from WhatsApp (filenames follow the `WhatsApp Image <date> at <time> (<n>).jpeg` pattern) and manually dropped into folders that act as the class labels.
+The dataset is collected and sorted, the repo/docs structure is set up, and the model build is in progress (see `Model & Training/`). Photos were originally exported from WhatsApp (filenames followed the `WhatsApp Image <date> at <time> (<n>).jpeg` pattern) and manually sorted into folders that act as the class labels; they've since been renamed to random IDs (`img_<id>.jpeg`) with a manifest mapping back to the originals — see [rename_manifest.csv](context/rename_manifest.csv).
 
 ## 3. Dataset
 
-### 3.1 Folder structure = class labels
+The dataset lives under `Model & Training/pictures/` in **two parallel versions** of the same 176 photos:
+
+### 3.1 `pictures/extended version/` — the original 5 classes
 
 | Folder (Hebrew) | Meaning | Condition | Time of day | # Images |
 |---|---|---|---|---|
-| `pictures/תקין יום` | "Valid — day" | Normal/OK cake | Day | 62 |
-| `pictures/תקין לילה` | "Valid — night" | Normal/OK cake | Night | 30 |
-| `pictures/לא תקין יום` | "Invalid — day" | Abnormal/faulty cake | Day | 42 |
-| `pictures/לא תקין לילה` | "Invalid — night" | Abnormal/faulty cake | Night | 34 |
-| `pictures/מסנן ריק` | "Empty filter" | No cake on filter | Not split by day/night | 8 |
+| `תקין יום` | "Valid — day" | Normal/OK cake | Day | 62 |
+| `תקין לילה` | "Valid — night" | Normal/OK cake | Night | 30 |
+| `לא תקין יום` | "Invalid — day" | Abnormal/faulty cake | Day | 42 |
+| `לא תקין לילה` | "Invalid — night" | Abnormal/faulty cake | Night | 34 |
+| `מסנן ריק` | "Empty filter" | No cake on filter | Not split by day/night | 8 |
 
-**Total: 176 images across 5 classes.**
+### 3.2 `pictures/simple version/` — the 3 classes actually used for training
 
-This is effectively a **5-class problem** (valid-day, valid-night, invalid-day, invalid-night, empty), which could also be modeled as **two binary/derived labels** — condition (valid / invalid / empty) × time of day (day / night) — depending on how the model will be used downstream.
+Day and night are collapsed (see the decision in §5); each file here is a copy of the same-named file in `extended version/`.
 
-### 3.2 Known dataset characteristics to design around
+| Folder | Made from | # Images |
+|---|---|---|
+| `valid` | `תקין יום` + `תקין לילה` | 92 |
+| `invalid` | `לא תקין יום` + `לא תקין לילה` | 76 |
+| `empty` | `מסנן ריק` | 8 |
+
+**Total: 176 images.**
+
+### 3.3 Known dataset characteristics to design around
 
 - **Class imbalance**: "empty filter" has only 8 images vs. 30–62 for the other classes, and it isn't split into day/night. This will need attention (oversampling, augmentation, or collecting more empty-filter shots, ideally for both day and night).
 - **Burned-in timestamp overlay**: every image has a date/time stamp in the top-right corner. This is not part of the actual scene and should either be cropped out or masked before training so the model doesn't learn to key off it.
@@ -47,7 +57,6 @@ This is effectively a **5-class problem** (valid-day, valid-night, invalid-day, 
 2. **Data cleaning & preprocessing**
    - Crop or mask out the burned-in timestamp overlay.
    - Resize/normalize images to a consistent resolution.
-   - Decide on the final label scheme (5-way vs. condition + day/night as separate outputs).
    - Split into train / validation / test sets (careful to avoid near-duplicate frames — many images are seconds apart — leaking across splits).
 3. **Address class imbalance** — augmentation (rotation/crop/brightness jitter suited to the steam/lighting conditions) and/or targeted collection of more "empty filter" images.
 4. **Model training** — train an image classifier (e.g. a fine-tuned CNN such as ResNet/EfficientNet/MobileNet, or a lightweight custom CNN given the modest dataset size) to predict the class from an image.
@@ -55,9 +64,17 @@ This is effectively a **5-class problem** (valid-day, valid-night, invalid-day, 
 6. **Inference / integration** — once accuracy is acceptable, run the model on new frames from the live camera feed (e.g. sampled every N minutes) and flag "invalid" states for an operator, e.g. via an alert/notification.
 7. **Iteration** — feed back misclassified real-world frames into the labeled dataset to keep improving the model over time.
 
-## 5. Open Questions / Next Steps
+## 5. Decisions (2026-09-22)
+
+- **Label scheme**: simplified to **3 classes** — `valid`, `invalid`, `empty` (§3.2). Day/night is not a separate class; it's handled as a lighting condition the model needs to be robust to (via augmentation), and checked for during evaluation rather than predicted.
+- **Framework**: PyTorch, using a pretrained torchvision backbone (transfer learning) rather than training a CNN from scratch, given the small dataset.
+- **Training environment**: Google Colab (free GPU) — the local machine's GPU (AMD, no CUDA) can't do accelerated training on Windows.
+- **Deliverables**: a walkthrough notebook, a written results report, presentation slides, and a local live-demo script.
+
+See `Model & Training/scripts/build_dataset_index.py` and `Model & Training/notebooks/train_and_evaluate.ipynb` for the implementation.
+
+## 6. Open Questions / Next Steps
 
 - Confirm the exact equipment name/process (what is a "Gibson filter" — brand/model — and what specifically defines "invalid" beyond visual cracking/patchiness?).
-- Decide the target label scheme (5-class vs. multi-output).
 - Decide where/how the camera feed will be sampled for live inference (folder of new images, RTSP stream, etc.).
 - Decide the deployment target (local script, small server, edge device near the camera, etc.) and how alerts should be delivered.
