@@ -237,7 +237,7 @@ This is a useful negative result: with two models this close in quality but one 
 2. **A live model doesn't need to detect "empty" at all** — the operator empties the filter themselves, so they already know it's empty; the camera has no information advantage there. Asking the model to spend capacity distinguishing "empty" from "invalid" is solving a problem the operator doesn't have.
 3. The natural production design follows from this: **the model gets toggled off when the operator empties the filter, and toggled back on once filtration resumes** — "empty" is an operator-controlled state to route around, not a class the vision model needs to recognize on its own.
 
-- **Recommended operating threshold**: ~0.45–0.5 (F1-optimal values for split-based models ranged 0.435–0.541 across §9's and §10's separate runs) — re-derive the exact figure from `full_pipeline.ipynb`'s output once run for real, since that's the one consolidated, non-redundant source of truth going forward.
+- **Recommended operating threshold**: ~0.37–0.49 — re-derived from `full_pipeline.ipynb`'s real run on the corrected data (§18): F1-optimal 0.37, Youden 0.49 for the promoted model's CV predictions. (Superseded the earlier ~0.45–0.5 estimate from §9/§10's separate runs.)
 - **Promoted model**: `models/gypsum_classifier_split_70_30.pt`, produced by `full_pipeline.ipynb` — kept alongside `gypsum_classifier_extended_70_30.pt` as the runner-up candidate, not deleted.
 - **Caveat, stated plainly, not buried**: still a 176-photo dataset, single seed, CPU-trained runs throughout. This is the best-supported hypothesis given everything tried, not a production-validated result — deploy it as the leading candidate and monitor, don't treat the question as permanently closed.
 
@@ -260,7 +260,7 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 - ~~Confirm the exact equipment name/process and what "invalid" means beyond visual cracking/patchiness~~ — answered, see §1.2: it's a gypsum belt filter, and "invalid" means wet gypsum (yield loss + equipment damage risk).
 - Confirm what "day"/"night" actually mean in the source photos (§3.4) — the timestamps rule out literal time-of-day, and §3.5's EDA rules out a simple whole-image-brightness explanation too. Still unresolved — §16's full-scale-pilot plan proposes engineering the ambiguity away with fixed lighting, rather than continuing to try to explain it post-hoc.
 - If pursuing ensembling further, try confidence-weighted averaging (§10) rather than a plain mean.
-- Run `full_pipeline.ipynb` for real in Colab to produce `gypsum_classifier_split_70_30.pt`, then re-point `predict.py`'s spot-check at it.
+- ~~Run `full_pipeline.ipynb` for real to produce `gypsum_classifier_split_70_30.pt`~~ — done (§18), on the corrected data; `predict.py` now uses it.
 - Decide where the real camera feed comes from (RTSP stream, a folder the camera itself writes to, etc.) — §14's watcher is a stand-in for whatever that turns out to be.
 - Decide the real deployment target (local script, small server, edge device near the camera, etc.) and the real alerting channel (§14 only prints to the console).
 
@@ -278,7 +278,7 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 
 - **Small dataset, by IT constraint, not by choice** — access to plant photos for this project was limited by IT/data-access restrictions, leaving only 176 images (8 of them "empty"). The results here are real and better than chance would predict, but every accuracy number carries meaningful uncertainty (CV std devs of several points) — a full-scale pilot with proper data access would retrain on a much larger database and should do materially better.
 - Single seed, mostly CPU-trained runs — results could shift with a different seed or backbone.
-- The **promoted model hasn't been trained for a real full run yet** — `full_pipeline.ipynb` still needs a real (non-`QUICK_MODE`) pass in Colab to produce final weights; "promoted" is provisional.
+- The final full run (§18) was a single seed on CPU — the promoted model is now trained for real, but its numbers haven't been repeated across seeds, so their run-to-run variance is unmeasured beyond the CV fold spread.
 - **Day/night still isn't *explained*** — literal time-of-day and whole-image brightness are both ruled out (§3.4, §3.5), and the real distinguishing factor is still unknown, though §17's full manual review found the day/night *labels themselves* are largely reliable regardless (only 1 mismatch in 168) — §16.3 proposes removing the ambiguity at the source instead of continuing to try to explain it.
 - The live-feed demo is a **simulation** (folder-watcher + console alert), not a real camera/RTSP integration or real alerting channel.
 - Single fixed camera install, uncontrolled lighting — unclear how well this generalizes to a different angle or to genuinely fixed lighting without retraining.
@@ -288,7 +288,7 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 ### 16.3 Further directions
 
 **Near-term (fixing what this phase left open):**
-- Run `full_pipeline.ipynb` for real to get trustworthy final numbers and the actual promoted model weights.
+- ~~Run `full_pipeline.ipynb` for real~~ — done (§18). Next: repeat it across several seeds to measure run-to-run variance.
 - Try confidence-weighted ensembling (weight the stronger model more) instead of a plain average.
 - Build the real camera feed + alerting channel, replacing the folder-watcher simulation.
 
@@ -334,3 +334,57 @@ Rather than continuing to treat the §3.4/§3.5 day/night ambiguity as unresolve
 - **Net effect on the §12 decision: unchanged, and if anything reinforced.** No-empty split remains the clear leader on the metric that matters most for cross-scheme comparison (ROC AUC on the CV numbers), now by a wider margin than before.
 
 Training curves, confusion matrices, and an ROC overlay are saved to `models/corrected_daynight/` (`result_extended_70_30.png`, `result_split_70_30.png`, `confusion_extended_cv.png`, `confusion_split_cv.png`, `roc_corrected.png`, `corrected_results.json`). The original `pictures/extended version/` and `pictures/no-empty version/` folders, `dataset_split.csv`, and every previously-trained model are left untouched — this is an additional, comparable analysis, not a replacement of the earlier work.
+
+## 18. Final full run on the corrected data (2026-09-24)
+
+`full_pipeline.ipynb` run for real (`QUICK_MODE = False`, all 17 configs / 23 trainings, 10 epochs each) on the day/night-corrected dataset (§17) — the notebook now defaults to `USE_CORRECTED_DATA = True`. Run locally on CPU with the same notebook code (the Colab session couldn't be used without a Google sign-in in the browser pane; the local retrain in §17 showed CPU is fast enough on this dataset — the whole run took roughly 15 minutes). **These are the project's final numbers.** Every output is in `models/full_pipeline/`: `full_pipeline_results.json`, one `result_<config>.png` per config (loss curve, accuracy curve train vs. val, row-normalized confusion matrix), the sweep bar charts, threshold/ROC/PR/calibration overlays, the boost overlays, and the class-distribution chart. The two kept models — `models/gypsum_classifier_split_70_30.pt` (promoted) and `gypsum_classifier_extended_70_30.pt` (runner-up, replacing the older uncorrected one from `train_extended_70_30.py`) — now exist, and `predict.py` picks up the promoted one automatically.
+
+| Config | Accuracy | Macro F1 | Invalid recall | ROC AUC | PR AP | Youden thr. | F1-opt. thr. |
+|---|---|---|---|---|---|---|---|
+| Lite, 80/20 | 0.600 | 0.450 | 0.600 | 1.000 | 1.000 | 0.273 | 0.273 |
+| Lite, 75/25 | 0.851 | 0.453 | 0.400 | 0.905 | 0.565 | 0.215 | 0.215 |
+| Lite, 70/30 | 0.600 | 0.391 | 0.424 | 0.773 | 0.705 | 0.221 | 0.147 |
+| Lite, 3-fold CV | 0.633 ± 0.027 | 0.540 | 0.433 ± 0.124 | 0.763 | 0.653 | 0.178 | 0.109 |
+| Lite, 80/20 + sampler | 0.700 | 0.519 | 0.800 | 1.000 | 1.000 | 0.398 | 0.398 |
+| Extended, 80/20 | 0.632 | 0.415 | 0.643 | 0.871 | 0.960 | 0.430 | 0.138 |
+| Extended, 75/25 | 0.717 | 0.465 | 0.714 | 0.859 | 0.711 | 0.302 | 0.476 |
+| Extended, 70/30 | 0.698 | 0.439 | 0.571 | 0.864 | 0.731 | 0.224 | 0.224 |
+| Extended, 2-fold CV | 0.676 ± 0.049 | 0.642 | 0.499 ± 0.144 | 0.797 | 0.689 | 0.299 | 0.299 |
+| No-empty collapsed, 80/20 | 0.818 | 0.804 | 0.750 | 1.000 | 1.000 | 0.170 | 0.170 |
+| No-empty collapsed, 75/25 | 0.833 | 0.747 | 0.750 | 0.912 | 0.713 | 0.438 | 0.438 |
+| No-empty collapsed, 70/30 | 0.547 | 0.508 | 0.286 | 0.681 | 0.600 | 0.263 | 0.122 |
+| No-empty collapsed, 3-fold CV | 0.700 ± 0.147 | 0.677 | 0.561 ± 0.255 | 0.723 | 0.671 | 0.375 | 0.173 |
+| No-empty split, 80/20 | 0.750 | 0.709 | 0.692 | 0.974 | 0.995 | 0.439 | 0.226 |
+| No-empty split, 75/25 | 0.759 | 0.739 | 0.765 | 0.895 | 0.804 | 0.347 | 0.347 |
+| No-empty split, 70/30 | 0.741 | 0.722 | 0.765 | 0.855 | 0.730 | 0.278 | 0.365 |
+| **No-empty split, 2-fold CV** | **0.803 ± 0.004** | **0.791** | **0.807 ± 0.016** | **0.882** | **0.826** | 0.493 | 0.366 |
+
+(Single-split AUCs of 1.000 on 10–16 test images are small-test-set artifacts, same caveat as §8/§9 — the CV rows are the ones to read.)
+
+Ensemble / TTA / calibration, same ground truth (no-empty definition) as §10:
+
+| Variant | ROC AUC | PR AP |
+|---|---|---|
+| Extended alone | 0.782 | 0.704 |
+| **No-empty split alone** | **0.882** | **0.826** |
+| Ensemble (averaged) | 0.846 | 0.774 |
+| Ensemble + TTA | 0.862 | 0.795 |
+| Ensemble + TTA + calibration | 0.862 | 0.795 |
+
+**Findings — before (original data, §8–§10) vs. after (corrected data):**
+
+| Promoted model (no-empty split, CV) | Before | After |
+|---|---|---|
+| Accuracy | 77.4% ± 1.9 | **80.3% ± 0.4** |
+| Invalid recall | 71.1% ± 5.4 | **80.7% ± 1.6** |
+| ROC AUC | 0.818 | **0.882** |
+| PR AP | 0.768 | **0.826** |
+| Alone, vs. ensemble (§10) | 0.852 | **0.882** |
+
+- **The mislabeled photo had been costing the promoted model accuracy.** With it fixed, no-empty split CV accuracy rose ~3 points, invalid recall ~10 points, and the fold-to-fold spread tightened sharply (±1.9 → ±0.4 accuracy, ±5.4 → ±1.6 recall).
+- **Control check**: the two schemes day/night *doesn't* touch reproduce almost exactly — lite CV 63.3% → 63.3%, no-empty collapsed CV 70.8% → 70.0%. That's what makes it reasonable to attribute the split scheme's gain to the label fix rather than to run-to-run noise.
+- **Extended dropped** (CV accuracy 72.3% → 67.6%, AUC 0.837 → 0.797). It keeps day/night as classes too, so it also changed — reported as-is. It doesn't affect the decision: extended was already the runner-up.
+- **§9's extended-vs-split "toss-up" on ROC AUC is gone**: split now leads on AUC as well (0.882 vs. 0.797), not only on accuracy — every metric now points the same way, even before the same-ground-truth comparison of §12.
+- **Thresholds**: every one of the 17 configs has both its Youden and F1-optimal threshold below 0.5 — the §9 finding holds more strongly than before. For the promoted model: Youden 0.49, F1-optimal 0.37 → recommended operating range ~0.37–0.49.
+- **Ensembling still doesn't beat split alone** (0.882 vs. best ensemble 0.862) — §10's negative result holds.
+- **Net: the §12 decision stands, now on stronger evidence.**

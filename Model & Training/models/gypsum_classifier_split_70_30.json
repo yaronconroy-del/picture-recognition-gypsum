@@ -1,0 +1,23 @@
+{
+  "config": {
+    "backbone": "mobilenet_v2",
+    "unfreeze_last_block": true,
+    "lr": 0.001,
+    "epochs": 10
+  },
+  "scheme": "split",
+  "label_col": "noempty_split_label",
+  "classes": [
+    "invalid_day",
+    "invalid_night",
+    "valid_day",
+    "valid_night"
+  ],
+  "metrics": {
+    "accuracy": 0.7407407407407407,
+    "macro_f1": 0.7220588235294118,
+    "invalid_recall": 0.7647058823529411,
+    "best_val_loss": 0.49947183539992884,
+    "n_test": 54
+  }
+}
