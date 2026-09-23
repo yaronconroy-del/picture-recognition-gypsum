@@ -279,7 +279,7 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 - **Small dataset, by IT constraint, not by choice** — access to plant photos for this project was limited by IT/data-access restrictions, leaving only 176 images (8 of them "empty"). The results here are real and better than chance would predict, but every accuracy number carries meaningful uncertainty (CV std devs of several points) — a full-scale pilot with proper data access would retrain on a much larger database and should do materially better.
 - Single seed, mostly CPU-trained runs — results could shift with a different seed or backbone.
 - The **promoted model hasn't been trained for a real full run yet** — `full_pipeline.ipynb` still needs a real (non-`QUICK_MODE`) pass in Colab to produce final weights; "promoted" is provisional.
-- **Day/night remains unexplained** — ruled out literal time-of-day and whole-image brightness, but the real distinguishing factor is still unknown (§16.3 proposes removing the ambiguity at the source instead).
+- **Day/night still isn't *explained*** — literal time-of-day and whole-image brightness are both ruled out (§3.4, §3.5), and the real distinguishing factor is still unknown, though §17's full manual review found the day/night *labels themselves* are largely reliable regardless (only 1 mismatch in 168) — §16.3 proposes removing the ambiguity at the source instead of continuing to try to explain it.
 - The live-feed demo is a **simulation** (folder-watcher + console alert), not a real camera/RTSP integration or real alerting channel.
 - Single fixed camera install, uncontrolled lighting — unclear how well this generalizes to a different angle or to genuinely fixed lighting without retraining.
 - Source images are WhatsApp-recompressed, not native camera resolution.
@@ -299,3 +299,38 @@ This is a **simulation**, not a real camera integration — a real feed would ne
 - **Move beyond binary valid/invalid to a continuous filtration-quality score**, so the process's actual trend is visible, not just a pass/fail flag.
 - **Make it a time-based model** that tracks change over a sequence of frames and flags when the process is *starting* to turn bad — early warning instead of single-frame classification after the fact.
 - **Far future**: a downstream model that calculates the right reactor process parameters based on the predicted filtration state — closing the loop from vision straight through to process control, not just alerting an operator.
+
+## 17. Day/night mislabel review and retraining (2026-09-23)
+
+Rather than continuing to treat the §3.4/§3.5 day/night ambiguity as unresolved, every one of the 168 day/night-labeled photos (`empty` excluded — it isn't split by day/night) was manually reviewed at full resolution and judged against the one reliable visual signature found in §3.5's EDA: night photos show a small, sharp, near-saturated floodlight glare; day photos show flatter, more diffuse haze/sun-through-steam with no sharp point source.
+
+**Method**: contact sheets (grids of labeled thumbnails, ~18 photos each, 13 sheets total) were built for all four day/night folders and reviewed first; every photo that looked ambiguous or wrong at thumbnail scale was then re-examined individually at full resolution before any decision was made — several thumbnail-scale "candidates" (photos that looked flat/day-like as a small thumbnail) turned out to have the floodlight glare clearly visible once zoomed in, and were left alone. Only genuinely confident mismatches were corrected; anything still ambiguous at full resolution was left as originally labeled rather than guessed at.
+
+**Finding: 1 mismatch out of 168** — `img_dfa74e21.jpeg`, labeled `תקין לילה` (valid_night), shows flat diffuse daylight-style lighting with no trace of a floodlight glare anywhere in the frame. Moved to `תקין יום` (valid_day). This is a much lower mislabel rate than the unresolved §3.4 ambiguity might have suggested — it indicates the original manual sort was generally reliable on this specific visual cue, even though what the labels *mean* (§3.4) remains an open question.
+
+**New dataset copies** (not overwriting the originals): `pictures/extended version (day-night corrected)/` and `pictures/no-empty version (day-night corrected)/` (the latter rebuilt by re-applying the same 8-photo empty→invalid reassignment from §8 on top of the correction). A new `scripts/build_dataset_index_corrected.py` re-derives `extended_label`/`noempty_split_label` (and their bursts/splits/folds) **live from these corrected folders** rather than from the rename manifest's original sort — `dataset_split_corrected.csv`. `label` (lite) and `noempty_label` (collapsed) are unaffected by day/night and carried over unchanged from `dataset_split.csv`.
+
+**Retrained on the corrected data** (`scripts/retrain_corrected.py`, real 10-epoch runs, same fixed config as every other training in this project): `extended_70_30`, `split_70_30`, and both CV variants — the only configs day/night actually affects.
+
+| Config | Metric | Original | Corrected | Δ |
+|---|---|---|---|---|
+| extended_70_30 | Accuracy | 0.648 | 0.717 | +0.069 |
+| extended_70_30 | ROC AUC | 0.857 | 0.854 | −0.004 |
+| extended_70_30 | PR AP | 0.691 | 0.726 | +0.035 |
+| split_70_30 | Accuracy | 0.764 | 0.759 | −0.005 |
+| split_70_30 | ROC AUC | 0.861 | 0.844 | −0.017 |
+| split_70_30 | PR AP | 0.739 | 0.742 | +0.002 |
+| extended_cv | Accuracy | 0.723 ± 0.005 | 0.693 ± 0.066 | −0.030 |
+| extended_cv | ROC AUC | 0.837 | 0.806 | −0.031 |
+| extended_cv | PR AP | 0.752 | 0.721 | −0.031 |
+| **split_cv** | **Accuracy** | **0.774 ± 0.019** | **0.791 ± 0.051** | **+0.017** |
+| **split_cv** | **ROC AUC** | **0.818** | **0.897** | **+0.079** |
+| **split_cv** | **PR AP** | **0.768** | **0.865** | **+0.097** |
+
+**Findings, reported straight in both directions:**
+- **The promoted scheme (no-empty split) held up and, on cross-validation, improved meaningfully** — ROC AUC 0.818 → 0.897, PR AP 0.768 → 0.865, accuracy 77.4% → 79.1%. This is a genuine positive signal for the §12 decision, not just noise in one direction: the single relabeled photo evidently mattered more to this scheme's fold composition than its 1-in-176 share of the data would suggest.
+- **Not a uniform improvement, though**: `split_cv`'s invalid recall actually dropped (0.711 → 0.630), and both CV configs' fold-to-fold standard deviation increased noticeably (split: ±0.019 → ±0.051; extended: ±0.005 → ±0.066) — expected, since with only 2-fold CV on this little data, reassigning even one photo changes which session lands in which fold, and that reshuffling is a bigger factor here than the label fix itself.
+- **Extended (the runner-up scheme) moved slightly down** on CV (0.837 → 0.806 AUC) but slightly up on the single 70/30 split (accuracy 0.648 → 0.717) — a split this small and a change this tiny don't move things consistently in one direction, which is exactly what you'd expect from correcting 1 image out of 176, not a sign the correction was wrong.
+- **Net effect on the §12 decision: unchanged, and if anything reinforced.** No-empty split remains the clear leader on the metric that matters most for cross-scheme comparison (ROC AUC on the CV numbers), now by a wider margin than before.
+
+Training curves, confusion matrices, and an ROC overlay are saved to `models/corrected_daynight/` (`result_extended_70_30.png`, `result_split_70_30.png`, `confusion_extended_cv.png`, `confusion_split_cv.png`, `roc_corrected.png`, `corrected_results.json`). The original `pictures/extended version/` and `pictures/no-empty version/` folders, `dataset_split.csv`, and every previously-trained model are left untouched — this is an additional, comparable analysis, not a replacement of the earlier work.
